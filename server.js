@@ -11,14 +11,7 @@ const {PORT, DATABASE_URL } = require('./config');
 
 //Import the mongoose module
 const mongoose = require('mongoose');
-//Set up default mongoose connection
-const mongoDB = 'mongodb://ari:ari@ds113640.mlab.com:13640/birds';
-mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
-const db = mongoose.connection;
-//Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
 
 //create the express application
 const app = express();
