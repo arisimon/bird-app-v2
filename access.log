@@ -1,0 +1,10 @@
+::1 - - [01/Jun/2018:23:54:18 +0000] "GET / HTTP/1.1" 200 832
+::1 - - [01/Jun/2018:23:54:18 +0000] "GET /public/css/normalize.css HTTP/1.1" 404 163
+::1 - - [01/Jun/2018:23:54:18 +0000] "GET /public/css/skeleton.css HTTP/1.1" 404 162
+::1 - - [01/Jun/2018:23:54:18 +0000] "GET /public/css/main.css HTTP/1.1" 404 158
+::1 - - [01/Jun/2018:23:54:19 +0000] "GET /images/leaf.png HTTP/1.1" 404 154
+::1 - - [01/Jun/2018:23:54:56 +0000] "GET / HTTP/1.1" 200 781
+::1 - - [01/Jun/2018:23:54:56 +0000] "GET /public/css/normalize.css HTTP/1.1" 404 163
+::1 - - [01/Jun/2018:23:54:56 +0000] "GET /public/css/skeleton.css HTTP/1.1" 404 162
+::1 - - [01/Jun/2018:23:54:56 +0000] "GET /public/css/main.css HTTP/1.1" 404 158
+::1 - - [01/Jun/2018:23:54:57 +0000] "GET /favicon.ico HTTP/1.1" 404 150
