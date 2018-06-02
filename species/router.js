@@ -8,16 +8,22 @@ const urlParser = bodyParser.urlencoded({ extended: true});
 const mongoose = require('mongoose');
 const router = express.Router();
 const {Species} = require('./models');
+const passport = require('passport');
 
 
 //set up router parsing
 router.use(jsonParser);
 router.use(urlParser);
 
+//Authentication
+const {localStrategy, jwtStrategy } = require('../auth/strategies');
+
+passport.use('local', localStrategy);
+passport.use(jwtStrategy);
 
 
 //GET request for all species
-router.get('/', (req, res) => {
+router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
     console.log('GETting all species')
 	 Species
         .find()
@@ -37,7 +43,7 @@ router.get('/', (req, res) => {
 //     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 // };
 // //GET species based off search input, if not found get all species
-// router.get('/', function(req, res, next) {
+// router.get('/', passport.authenticate('jwt', {session: false}), function(req, res, next) {
 //     console.log('Received a GET request to find species');
 //     console.log(req.query);
 //     let noMatch = null;
@@ -70,7 +76,7 @@ router.get('/', (req, res) => {
 
 
 //GET request by ID
-router.get('/:id', (req, res) => {
+router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
     console.log(`GETting species with ID: ${req.param.id}`);
     Species
         .findById(req.params.id)

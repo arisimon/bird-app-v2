@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const urlParser = bodyParser.urlencoded({ extended: true });
 const mongoose = require('mongoose');
+const passport = require('passport');
 const router = express.Router();
 const { Observations } = require('./models');
 
@@ -15,8 +16,14 @@ router.use(jsonParser);
 router.use(urlParser);
 
 
+//Authentication
+const {localStrategy, jwtStrategy } = require('../auth/strategies');
+
+passport.use('local', localStrategy);
+passport.use(jwtStrategy);
+
 //GET routes
-router.get('/', (req, res) => {
+router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
     console.log('GETting all observations');
     Observations
         .find()
@@ -29,7 +36,7 @@ router.get('/', (req, res) => {
         })
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
     console.log(`GETting observation ${req.param.id}`);
     Observations
         .findById(req.params.id)
@@ -42,21 +49,21 @@ router.get('/:id', (req, res) => {
 });
 
 
-// router.get('/user/:user', passport.authenticate('jwt', {session: false}), (req, res) => {
-// 	Garden
-// 		.find({user: `${req.params.user}`})
-// 		.exec()
-// 		.then(plants => {
-// 			res.status(200).json(plants)
-// 		})
-// 		.catch(err => {
-// 			res.status(500).json({message: 'Internal server error'});
-// 		})
-// });
-// 
+router.get('/user/:user', passport.authenticate('jwt', {session: false}), (req, res) => {
+	Garden
+		.find({user: `${req.params.user}`})
+		.exec()
+		.then(plants => {
+			res.status(200).json(plants)
+		})
+		.catch(err => {
+			res.status(500).json({message: 'Internal server error'});
+		})
+});
+
 
 //POST route
-router.post('/', (req, res) => {
+router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
     console.log('POSTing a new observation');
 
     //check required fields
@@ -88,7 +95,7 @@ router.post('/', (req, res) => {
 
 
 //PUT route
-router.put('/:id', (req, res) => {
+router.put('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
     console.log(`Updating observation ${req.params.id}`);
 
     const toUpdate = {};
@@ -113,18 +120,13 @@ router.put('/:id', (req, res) => {
 
 
 //DELETE route
-router.delete('/:id', (req, res) => {
+router.delete('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
     Observations
         .findByIdAndRemove(req.params.id)
         .then(observations => res.json({ data: req.params.id }).status(204).end())
         .catch(err => res.status(500).json({ message: 'Internal server error' }));
 });
 
-
-
-router.use('*', (req, res) => {
-    res.status(404).send('URL Not Found');
-});
 
 
 module.exports = { router };

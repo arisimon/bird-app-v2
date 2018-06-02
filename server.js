@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
@@ -22,7 +23,7 @@ mongoose.Promise = global.Promise;
 
 //import routes
 const { router: usersRouter } = require('./users');
-// const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 const { router: observationRouter } = require('./observations');
 const { router: speciesRouter } = require('./species');
 
@@ -61,9 +62,19 @@ app.use(express.static('public'));
 
 //use routes
 app.use('/users/', usersRouter);
-// app.use('/auth/', authRouter);
+app.use('/auth/', authRouter);
 app.use('/observations/', observationRouter);
 app.use('/api/species/', speciesRouter);
+app.use('*', (req, res) => {
+    res.status(404).send('URL Not Found');
+});
+
+// Protected endpoint to test authentication
+app.get('/api/protected', passport.authenticate('jwt', { session: false }), (req, res) => {
+    return res.json({
+        data: 'Test Authentication'
+    });
+});
 
 
 let server;
