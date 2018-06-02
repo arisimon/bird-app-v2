@@ -1,0 +1,18 @@
+.modal-text {
+	text-decoration: none;
+}
+
+
+#register-modal, #login-modal {
+	text-align: center;
+}
+
+#register-modal input {
+	width: 65%;
+}
+
+.demo-info {
+	line-height: 0;
+    top: 11rem;
+
+}

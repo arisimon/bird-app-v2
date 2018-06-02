@@ -374,18 +374,27 @@ on small devices, paste the mobile query code up in the buttons section and styl
 there.
 */
 
-
+@media only screen and (max-width: 430px) {
+    #register-modal input {
+       width: 100%;
+   }
+}
+@media only screen and (max-width: 430px) {
+    .demo-info {
+       position: none;
+   }
+}
 /* Larger than mobile */
-@media (min-width: 400px) {}
+@media only screen and (min-width: 400px) {}
 
 /* Larger than phablet (also point when grid becomes active) */
-@media (min-width: 550px) {}
+@media only screen and(min-width: 550px) {}
 
 /* Larger than tablet */
-@media (min-width: 750px) {}
+@media only screen and(min-width: 750px) {}
 
 /* Larger than desktop */
-@media (min-width: 1000px) {}
+@media only screen and(min-width: 1000px) {}
 
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {}
