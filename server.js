@@ -5,13 +5,25 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const fs = require('fs');
 const path = require('path');
+const multer = require('multer');
+const uploads = multer({
+  dest: 'uploads' 
+});
 
-//import configuration files
-const {PORT, DATABASE_URL } = require('./config');
+//import configuration files/schema
+const {PORT, TEST_DATABASE_URL, DATABASE_URL } = require('./config');
+const {Observation} = require('./observations/models');
+const {Species} = require('./species/models');
 
 //Import the mongoose module
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
+
+//import routes
+// const {router: usersRouter} = require('./users');
+// const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
+const {router: observationRouter} = require('./observations');
+const {router: speciesRouter} = require('./species');
 
 //create the express application
 const app = express();
@@ -44,6 +56,13 @@ app.use(logger('common', {
 
 //serve static assets
 app.use(express.static('public'));
+
+
+//use routes
+app.use('/users/', usersRouter);
+app.use('/auth/', authRouter);
+app.use('/observations/', observationRouter);
+app.use('/species/', speciesRouter);
 
 
 let server;
