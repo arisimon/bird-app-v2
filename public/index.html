@@ -15,7 +15,8 @@
 
 <body>
     <!-- Home page -->
-    <div class='content container'>
+    <div class='content'>
+    	<div class='container'>
         <header class='row'>
             <div class='ul-full-width'>
                 <h1>Bird Observation Journal</h1>
@@ -24,7 +25,7 @@
         </header>
         <section class='login-section'>
             <h2>Are you an avid birder?</h2>
-            <p>A Keep track of your bird sightings with this awesome journal!</p>
+            <p>Keep track of your bird sightings with this awesome journal!</p>
             <a href="#login-modal" class="button" rel="modal:open">Log In</a>
             <br>
             <a href="#register-modal" class="button" rel="modal:open">Create Account</a>
@@ -34,16 +35,16 @@
     <div id="login-modal" class="modal container u-max-full-width">
         <div class='row'>
             <form id='login-modal-form'>
-                <div class='six columns'>
+                <div class='u-full-width'>
                     <label for='username'>Username:</label>
                     <input type="text" name="username" id='username' placeholder='Username'>
                     <br>
                     <label for='password'>Password</label>
                     <input type="password" name="password" id='password' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;'>
                 </div>
-                <br>
-                <div class='six columns'>
+                <div class='u-full-width'>
                     <div class='demo-info'>
+                    	<br>
                         <p><em>Demo username: Demo</em></p>
                         <p><em>Demo password: Password</em></p>
                     </div>
@@ -70,9 +71,9 @@
         </form>
     </div>
     <!-- This is the anchor for update modal -->
-    <p><a href="#ex1" rel="modal:open">Open Modal</a></p>
+    <!-- <p><a href="#ex1" rel="modal:open">Open Modal</a></p> -->
     <!-- modal -->
-    <div id="ex1" class="modal">
+    <!-- <div id="ex1" class="modal">
         <form id='modalUpdate' data-id='{{this._id}}'>
             <div class='row'>
                 <div class='six columns'>
@@ -96,12 +97,11 @@
             <textarea class="u-full-width" name='details' id="detailsModal"></textarea>
             <input id='observationSubmitModal' class="button-primary" type="submit" value="Update">
         </form>
-    </div>
-    <div class='container'>
+    </div> -->
         <footer class='row'>
             <p>Created by Ari Simon</p>
         </footer>
-    </div>
+        </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
