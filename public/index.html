@@ -16,92 +16,68 @@
 <body>
     <!-- Home page -->
     <div class='content'>
-    	<div class='container'>
-        <header class='row'>
-            <div class='ul-full-width'>
-                <h1>Bird Observation Journal</h1>
-                <a href='index.html' class='logout' style='display:none'>Logout</a>
-            </div>
-        </header>
-        <section class='login-section'>
-            <h2>Are you an avid birder?</h2>
-            <p>Keep track of your bird sightings with this awesome journal!</p>
-            <a href="#login-modal" class="button" rel="modal:open">Log In</a>
-            <br>
-            <a href="#register-modal" class="button" rel="modal:open">Create Account</a>
-        </section>
-    </div>
-    <!-- login modal -->
-    <div id="login-modal" class="modal container u-max-full-width">
-        <div class='row'>
-            <form id='login-modal-form'>
-                <div class='u-full-width'>
-                    <label for='username'>Username:</label>
-                    <input type="text" name="username" id='username' placeholder='Username'>
-                    <br>
-                    <label for='password'>Password</label>
-                    <input type="password" name="password" id='password' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;'>
+        <div class='container'>
+            <header class='row'>
+                <div class='ul-full-width'>
+                    <h1>Bird Observation Journal</h1>
+                    <a href='index.html' class='logout' style='display:none'>Logout</a>
                 </div>
-                <div class='u-full-width'>
-                    <div class='demo-info'>
-                    	<br>
-                        <p><em>Demo username: Demo</em></p>
-                        <p><em>Demo password: Password</em></p>
-                    </div>
-                </div>
-            </form>
+            </header>
+            <section class='login-section'>
+                <h2>Are you an avid birder?</h2>
+                <p>Keep track of your bird sightings with this awesome journal!</p>
+                <a href="#login-modal" class="button" rel="modal:open">Log In</a>
+                <br>
+                <a href="#register-modal" class="button" rel="modal:open">Create Account</a>
+            </section>
         </div>
-    </div>
-    <!-- registration modal -->
-    <div id="register-modal" class="modal container u-max-full-width">
-        <br>
-        <br>
-        <form id='register-modal-form'>
-            <label for='firstName'>First Name</label>
-            <input type="text" name="firstName" id='firstName' placeholder='John'>
-            <label for='lastName'>Last Name</label>
-            <input type="text" name="lastName" id='lastName' placeholder='Smith'>
-            <label for='username'>User name:</label>
-            <input type="text" name="username" id='username-rg' placeholder='Username'>
-            <label for='password'>Password</label>
-            <input type="password" name="password" id='password-rg' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;>
-            <br>
-            <br>
-            <input id='register-modal-submit' class="button-primary" type="submit" value="Create Account">
-        </form>
-    </div>
-    <!-- This is the anchor for update modal -->
-    <!-- <p><a href="#ex1" rel="modal:open">Open Modal</a></p> -->
-    <!-- modal -->
-    <!-- <div id="ex1" class="modal">
-        <form id='modalUpdate' data-id='{{this._id}}'>
-            <div class='row'>
-                <div class='six columns'>
-                    <h2>Bird</h2>
-                    <label for='scientificNameModal'>Scientific Name</label>
-                    <input class='u-full-width' type='text' name='scientific_name' id='scientificNameModal'>
-                    <label for='commonNameModal'>Common Name</label>
-                    <input class='u-full-width' type='text' name='common_name' id='commonNameModal'>
-                    <label for='familyNameModal'>Family Name</label>
-                    <input class='u-full-width' type='text' name='family' id='familyNameModal'>
-                </div>
-                <div class='six columns'>
-                    <h2>Location</h2>
-                    <label for='autocomplete'>Address</label>
-                    <input class='u-full-width locationModal' id="autocomplete" name='address' type="text"></input>
-                    <h2>Photos</h2>
-                    <input class='u-full-width' type='file' id='photoUpload' accept='.png, .jpg, .jpeg .pdf' multiple>
+        <section id='modal-section'>
+            <!-- login modal -->
+            <div id="login-modal" class="modal container u-max-full-width">
+                <div class='row'>
+                    <form id='login-modal-form'>
+                        <div class='u-full-width'>
+                            <label for='username'>Username:</label>
+                            <input type="text" name="username" id='username' placeholder='Username' required='true'>
+                            <br>
+                            <label for='password'>Password</label>
+                            <input type="password" name="password" id='password' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' required='true'>
+                            <br>
+                            <input id='login-modal-submit' class="button-primary" type="submit" value="Sign In">
+                        </div>
+                        <div class='u-full-width'>
+                            <div class='demo-info'>
+                                <br>
+                                <p><em>Demo username: Demo</em></p>
+                                <p><em>Demo password: Password</em></p>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <label for="detailsModal">Observation Notes</label>
-            <textarea class="u-full-width" name='details' id="detailsModal"></textarea>
-            <input id='observationSubmitModal' class="button-primary" type="submit" value="Update">
-        </form>
-    </div> -->
+            <!-- registration modal -->
+            <div id="register-modal" class="modal container u-max-full-width">
+                <br>
+                <br>
+                <form id='register-modal-form'>
+                    <label for='firstName'>First Name</label>
+                    <input type="text" name="firstName" id='firstName' placeholder='John' required='true'>
+                    <label for='lastName'>Last Name</label>
+                    <input type="text" name="lastName" id='lastName' placeholder='Smith' required='true'>
+                    <label for='username'>User name:</label>
+                    <input type="text" name="username" id='username-rg' placeholder='Username' required='true'>
+                    <label for='password'>Password</label><span id='errorNotLong'></span>
+                    <input type="password" name="password" id='password-rg' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' required='true'>
+                    <br>
+                    <br>
+                    <input id='register-modal-submit' class="button-primary" type="submit" value="Create Account">
+                </form>
+            </div>
+        </section>
         <footer class='row'>
             <p>Created by Ari Simon</p>
         </footer>
-        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
