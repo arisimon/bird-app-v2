@@ -7,7 +7,10 @@ let user = localStorage.getItem('currentUser');
 function handleEventHandlers() {
     handleLoginForm();
     handleRegForm();
+    handleLogout();
 }
+
+
 
 //handle Login form
 function handleLoginForm() {
@@ -28,10 +31,6 @@ function handleLoginForm() {
                 user = username;
                 $('.login-section').hide();
                 location.replace('observations.html')
-                // $(".detail-section").hide();
-                // $(".home").show();
-                // $(".logout").show();
-                // $(".gardenDetails").show();
                 console.log(data);
                 // getGarden(data);
                 // getJournal(data);
@@ -92,6 +91,9 @@ function getObservations() {
             console.log(userData);
             displayObservations(userData);
         }
+        error: function(err) {
+            console.log(err.message);
+        }
     });
 }
 
@@ -105,4 +107,14 @@ function displayObservations(observation) {
 			</div>`)
     });
 }
+
+function handleLogout() {
+    $('.logout').click(function() {
+        console.log('User has been logged out');
+        localStorage.clear();
+        user = null;
+        window.location.reload(true);
+    });
+}
+
 $(handleEventHandlers);
