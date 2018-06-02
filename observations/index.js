@@ -1,3 +1,5 @@
+'use strict';
+
 const {Observations} = require('./models');
 const {router} = require('./router');
 

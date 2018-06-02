@@ -50,3 +50,8 @@
 ::1 - - [02/Jun/2018:00:32:27 +0000] "GET /app.js HTTP/1.1" 404 145
 ::1 - - [02/Jun/2018:00:32:27 +0000] "GET /app.js HTTP/1.1" 404 145
 ::1 - - [02/Jun/2018:00:32:28 +0000] "GET /favicon.ico HTTP/1.1" 404 150
+::1 - - [02/Jun/2018:02:28:00 +0000] "GET /observations HTTP/1.1" 500 2340
+::1 - - [02/Jun/2018:02:28:18 +0000] "GET /api/species HTTP/1.1" 500 2323
+::1 - - [02/Jun/2018:02:30:19 +0000] "GET /observations/5b11fc4bbf4ff7a6e598deb1 HTTP/1.1" 500 2312
+::1 - - [02/Jun/2018:02:33:04 +0000] "GET /observations/ HTTP/1.1" 500 2340
+::1 - - [02/Jun/2018:02:38:48 +0000] "GET /observations HTTP/1.1" 200 1022

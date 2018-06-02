@@ -59,10 +59,10 @@ app.use(express.static('public'));
 
 
 //use routes
-app.use('/users/', usersRouter);
-app.use('/auth/', authRouter);
+// app.use('/users/', usersRouter);
+// app.use('/auth/', authRouter);
 app.use('/observations/', observationRouter);
-app.use('/species/', speciesRouter);
+app.use('/api/species/', speciesRouter);
 
 
 let server;
