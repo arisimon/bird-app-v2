@@ -15,6 +15,18 @@ router.use(jsonParser);
 router.use(urlParser);
 
 
+router.get('/', (req, res) => {
+    console.log('GETting all species');
+    Species
+        .find()
+        .exec()
+        .then(species => {
+            res.status(200).json(species)
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Internal server error' });
+        })
+});
 
 // //GET species based off search input, if not found get all species
 // router.get('/', function(req, res, next) {
@@ -45,20 +57,21 @@ router.use(urlParser);
 //         });
 //     }
 // });
+// 
+// 
 
 
-// //GET species by ID
-// router.get('/:id', function(req, res, next) {
-//     Species
-//         .findById(req.params.id)
-//         .then(species => {
-//             res.json(species);
-//         })
-//         .catch(err => {
-//             console.error(err);
-//             res.status(500).json({ message: 'Internal server error' })
-//         });
-// });
+router.get('/:id', (req, res) => {
+    console.log(`GETting species ${req.param.id}`);
+    Species
+        .findById(req.params.id)
+        .exec()
+        .then(species => res.status(200).json(species))
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ message: 'Internal server error' })
+        })
+});
 
 // //function to format query strings
 // function escapeRegex(text) {

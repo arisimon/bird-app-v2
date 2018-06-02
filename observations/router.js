@@ -17,7 +17,7 @@ router.use(urlParser);
 
 //GET routes
 router.get('/', (req, res) => {
-	console.log('GETting all observations');
+    console.log('GETting all observations');
     Observations
         .find()
         .exec()
@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-	console.log(`GETting observation ${req.param.id}`);
+    console.log(`GETting observation ${req.param.id}`);
     Observations
         .findById(req.params.id)
         .exec()
