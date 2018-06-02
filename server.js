@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const fs = require('fs');
 const path = require('path');
+const passport = require('passport');
 const multer = require('multer');
 const uploads = multer({
     dest: 'uploads'
@@ -61,8 +62,8 @@ app.use(express.static('public'));
 
 
 //use routes
-app.use('/users/', usersRouter);
-app.use('/auth/', authRouter);
+app.use('/api/users/', usersRouter);
+app.use('/api/auth/', authRouter);
 app.use('/observations/', observationRouter);
 app.use('/api/species/', speciesRouter);
 app.use('*', (req, res) => {

@@ -9,10 +9,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const router = express.Router();
 
-//import URLs for DB
-// const {DATABASE_URL, PORT} = require('../config.js');
-// mongoose.connect(DATABASE_URL);
-// mongoose.Promise = global.Promise;
+
 router.use(jsonParser);
 router.use(bodyParser.urlencoded({ extended: true }));
 
