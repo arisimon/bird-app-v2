@@ -17,7 +17,9 @@ function handleLoginForm() {
     $("#login-modal-form").submit(function(event) {
         event.preventDefault();
         let username = $("#username").val();
+        console.log(username);
         let password = $("#password").val();
+        console.log(password);
         let userInfo = { username, password };
         let settings = {
             url: "/api/auth/login",
@@ -29,19 +31,19 @@ function handleLoginForm() {
                 localStorage.setItem("authToken", data.authToken);
                 localStorage.setItem("currentUser", username);
                 user = username;
-                $('.login-section').hide();
-                location.replace('observations.html')
-                console.log(data);
-                // getGarden(data);
-                // getJournal(data);
+                setTimeout(function(data) {
+                    $('#login-modal-form').html('Success!');
+                    location.replace(('observations.html'), 15000);
+                })
             },
             error: function(err) {
                 console.log(err);
             }
-        };
+        }
         $.ajax(settings);
     })
 }
+
 
 
 //handle registration form
@@ -60,11 +62,7 @@ function handleRegForm() {
             data: JSON.stringify(user),
             success: function(data) {
                 console.log('successfully registered');
-                // $("##register-modal-form input[type='text']").val('');
-                // $("#register-page").hide();
-                // $(".login-section").hide();
-                // $(".detail-section").hide();
-                // $("#login-page").show();
+                $('#register-modal-form').html(`You've created an account!`);
             },
             error: function(err) {
                 console.log(err);
@@ -74,12 +72,12 @@ function handleRegForm() {
             }
         };
         $.ajax(settings);
-        console.log(settings);
     })
 }
 
 function getObservations() {
     let authToken = localStorage.getItem('authToken');
+    console.log('Getting observations');
     $.ajax({
         method: 'GET',
         url: `${OBSERVATION_URL}/user/${user}`,
@@ -87,22 +85,20 @@ function getObservations() {
             Authorization: `Bearer ${authToken}`
         },
         contentType: 'application/json',
-        success: function(userData) {
-            console.log(userData);
-            displayObservations(userData);
-        }
-        error: function(err) {
-            console.log(err.message);
+        success: function(data) {
+            alert(data);
+            displayObservations(data);
         }
     });
 }
 
 function displayObservations(observation) {
-    $.each(data, function(index, value) {
-        $('.observations-container').append(`		
+
+    $.each(observation, function(index, value) {
+        $('.observations-body').html(`		
         	<div class="row">
 			<div class="three columns">
-				<p>${data[index].scientific_name}</p>
+				<p>${observation[index].scientific_name}</p>
 				<img src="//unsplash.it/600/300" class="u-img-responsive">
 			</div>`)
     });
@@ -113,7 +109,7 @@ function handleLogout() {
         console.log('User has been logged out');
         localStorage.clear();
         user = null;
-        window.location.reload(true);
+        window.location.replace('index.html');
     });
 }
 
