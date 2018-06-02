@@ -15,9 +15,11 @@ router.use(jsonParser);
 router.use(urlParser);
 
 
+
+//GET request for all species
 router.get('/', (req, res) => {
-    console.log('GETting all species');
-    Species
+    console.log('GETting all species')
+	 Species
         .find()
         .exec()
         .then(species => {
@@ -26,8 +28,14 @@ router.get('/', (req, res) => {
         .catch(err => {
             res.status(500).json({ message: 'Internal server error' });
         })
-});
+})
 
+
+
+// //function to format query strings
+// function escapeRegex(text) {
+//     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+// };
 // //GET species based off search input, if not found get all species
 // router.get('/', function(req, res, next) {
 //     console.log('Received a GET request to find species');
@@ -35,7 +43,6 @@ router.get('/', (req, res) => {
 //     let noMatch = null;
 //     if (req.query.search) {
 //         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-//         // Get all species from DB
 //         Species.find({ common_name: regex }, function(err, allSpecies) {
 //             if (err) {
 //                 console.log(err);
@@ -43,26 +50,28 @@ router.get('/', (req, res) => {
 //                 if (allSpecies.length < 1) {
 //                     noMatch = "No species match that query, please try again.";
 //                 }
-//                 console.log(allSpecies);
+//                 res.status(200).json(species)
 //             }
 //         });
 //     } else {
 //         // Get all species from DB
-//         Species.find({}, function(err, allSpecies) {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 console.log('This is skipping my query!');
-//             }
-//         });
+//         Species
+//         .find()
+//         .exec()
+//         .then(species => {
+//             res.status(200).json(species)
+//         })
+//         .catch(err => {
+//             res.status(500).json({ message: 'Internal server error' });
+//         })
 //     }
 // });
-// 
-// 
 
 
+
+//GET request by ID
 router.get('/:id', (req, res) => {
-    console.log(`GETting species ${req.param.id}`);
+    console.log(`GETting species with ID: ${req.param.id}`);
     Species
         .findById(req.params.id)
         .exec()
@@ -73,10 +82,7 @@ router.get('/:id', (req, res) => {
         })
 });
 
-// //function to format query strings
-// function escapeRegex(text) {
-//     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-// };
+
 
 
 module.exports = {router};
