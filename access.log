@@ -55,3 +55,10 @@
 ::1 - - [02/Jun/2018:02:30:19 +0000] "GET /observations/5b11fc4bbf4ff7a6e598deb1 HTTP/1.1" 500 2312
 ::1 - - [02/Jun/2018:02:33:04 +0000] "GET /observations/ HTTP/1.1" 500 2340
 ::1 - - [02/Jun/2018:02:38:48 +0000] "GET /observations HTTP/1.1" 200 1022
+::1 - - [02/Jun/2018:02:53:37 +0000] "POST /observations HTTP/1.1" 201 290
+::1 - - [02/Jun/2018:02:53:42 +0000] "GET /observations HTTP/1.1" 200 1622
+::1 - - [02/Jun/2018:02:54:06 +0000] "DELETE /observations/5b1206b1b5de219aebf403e1 HTTP/1.1" 404 13
+::1 - - [02/Jun/2018:02:54:54 +0000] "DELETE /observations/5b1206b1b5de219aebf403e1 HTTP/1.1" 204 35
+::1 - - [02/Jun/2018:02:55:00 +0000] "GET /observations/ HTTP/1.1" 200 1322
+::1 - - [02/Jun/2018:02:59:24 +0000] "PUT /observations/5b12068f48bcd49ad01e4bdf HTTP/1.1" 204 315
+::1 - - [02/Jun/2018:02:59:36 +0000] "GET /observations/ HTTP/1.1" 200 1338

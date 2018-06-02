@@ -4,10 +4,10 @@ const express = require('express');
 const config = require('../config');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-const urlParser = bodyParser.urlencoded({ extended: true});
+const urlParser = bodyParser.urlencoded({ extended: true });
 const mongoose = require('mongoose');
 const router = express.Router();
-const {Observations} = require('./models');
+const { Observations } = require('./models');
 
 
 //set up router parsing
@@ -17,26 +17,26 @@ router.use(urlParser);
 
 //GET routes
 router.get('/', (req, res) => {
-	Observations
-		.find()
-		.exec()
-		.then(observations => {
-			res.status(200).json(observations)
-		})
-		.catch(err => {
-			res.status(500).json({message: 'Internal server error'});
-		})
+    Observations
+        .find()
+        .exec()
+        .then(observations => {
+            res.status(200).json(observations)
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Internal server error' });
+        })
 });
 
 router.get('/:id', (req, res) => {
-	Observations
-		.findById(req.params.id)
-		.exec()
-		.then(observations => res.status(200).json(observations))
-		.catch(err => {
-			console.error(err);
-			res.status(500).json({message: 'Internal server error'})
-		})
+    Observations
+        .findById(req.params.id)
+        .exec()
+        .then(observations => res.status(200).json(observations))
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ message: 'Internal server error' })
+        })
 });
 
 
@@ -55,12 +55,13 @@ router.get('/:id', (req, res) => {
 
 //POST route
 router.post('/', (req, res) => {
+    console.log('POSTing a new observation');
 
     //check required fields
     const requiredFields = ['commonName', 'location', 'notes'];
-    for(let i = 0; i < requiredFields.length; i++) {
+    for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
-        if(!(field in req.body)) {
+        if (!(field in req.body)) {
             const message = `Missing field ${field} in request body`;
             console.error(message);
             return res.status(400).send(message);
@@ -69,33 +70,59 @@ router.post('/', (req, res) => {
 
     Observations
         .create({
-            title: req.body.title,
-            content: req.body.content,
-            image: req.body.image
+            scientificName: req.body.scientificName,
+            commonName: req.body.commonName,
+            familyName: req.body.familyName,
+            location: req.body.location,
+            notes: req.body.notes,
+            photos: req.body.photos,
         })
-        .then(observations => res.status(201).json(post.serialize()))
-        .catch(err=> {
+        .then(observations => res.status(201).json(observations.serialize()))
+        .catch(err => {
             console.error(err);
-            res.status(500).message("Internal server error");
+            res.status(500).message('Internal server error');
         });
-});
-
-router.use('*', (req, res) => {
-	res.status(404).send('URL Not Found');
 });
 
 
 //PUT route
+router.put('/:id', (req, res) => {
+    console.log(`Updating observation ${req.params.id}`);
+
+    const toUpdate = {};
+    const updateableFields = ['scientificName', 'commonName', 'familyName', 'location', 'notes', 'photos'];
+    updateableFields.forEach((field) => {
+        if (field in req.body) {
+            toUpdate[field] = req.body[field];
+        } else {
+            const message = `Missing ${field} in request body`;
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    })
+    Observations
+        .findByIdAndUpdate(req.params.id, { $set: toUpdate }, { new: true })
+        .then(updatedObservation => res.json(updatedObservation).status(204).end())
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ message: "Internal server error" });
+        });
+});
 
 
 //DELETE route
 router.delete('/:id', (req, res) => {
     Observations
         .findByIdAndRemove(req.params.id)
-        .then(observations => res.json({data: req.params.id}).status(204).end())
-        .catch(err =>res.status(500).json({message: "Internal server error"}));
+        .then(observations => res.json({ data: req.params.id }).status(204).end())
+        .catch(err => res.status(500).json({ message: 'Internal server error' }));
 });
 
 
 
-module.exports = {router};
+router.use('*', (req, res) => {
+    res.status(404).send('URL Not Found');
+});
+
+
+module.exports = { router };
