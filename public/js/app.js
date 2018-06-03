@@ -10,12 +10,14 @@ function handleEventHandlers() {
     handleLogout();
     handleAddObservation();
     handleDeleteButton();
+    // handleUpdateButton();
 
-    if (location.href.split('/').pop() === 'observations.html' && !$('.observations-gallery').text().length) {
+    if (location.href.split('/').pop() === 'observations.html' && !$('.observations-items').text().length) {
         getObservations();
     }
 
 }
+
 
 
 
@@ -100,39 +102,45 @@ function getObservations() {
         success: function(data) {
             console.log(data);
             displayObservations(data);
+            console.log('success');
         }
     });
 }
 
+
 //function to render observations to page
 function displayObservations(observations) {
-
     $.each(observations, function(index, value) {
-        $('.observations-gallery').append(`		
-			<div class="three columns obs" data-id: ${value._id}>
-				<p>${observations[index].scientificName}</p>
-				<p>${observations[index].commonName}</p>
-				<p>${observations[index].familyName}</p>
-				<p>${observations[index].location}</p>
-				<p>${observations[index].obsDate}</p>
-				<p>${observations[index].notes}</p>
-				<img src="${observations[index].photos}" class="u-img-responsive">
-				<input id='updateBtn' class="button-primary" type="button" value="Update">
-				<input id='deleteBtn' class="button-primary" type="button" value="Delete">
-			</div>`)
+        $('.observation-items').append(` 
+                <li class="four columns" data-id= "${value._id}">
+                    <img src="${observations[index].photos}">
+            <div class="observation-detail">
+                <div class="vertical-centered">
+                    <p class="separator orange">${observations[index].commonName}</p>
+                   <p><strong>Scientific Name:</strong> ${observations[index].scientificName}</p>
+                   <p><strong>Family:</strong> ${observations[index].familyName}</p>
+                   <p><strong>Observation Location:</strong> <br> ${observations[index].location}</p>
+                   <p class='notesText'><strong>Notes:</strong><br> ${observations[index].notes}</p>
+                    <a class='updateBtn button button-primary' rel="modal:open" href='#updateModal' type='submit'>Update</a>
+                    <button class='deleteBtn button button-primary'>Delete</button>
+                        </div>
+                    </div>
+                </li>
+            `)
     });
 }
 
-
+//handle observation button event
 function handleAddObservation() {
     $('#newObservation').on('submit', event => {
         event.preventDefault();
         addObservation({
             user: user,
-            scientificName: $(event.currentTarget).find('#scientificNameModal').val(),
+            name: name,
+            scientificName: $(event.currentTarget).find('scientificNameModal').val(),
             commonName: $(event.currentTarget).find('#commonNameModal').val(),
             familyName: $(event.currentTarget).find('#familyNameModal').val(),
-            location: $(event.currentTarget).find('#autocomplete-address').val(),
+            location: $(event.currentTarget).find('#locationModal').val(),
             notes: $(event.currentTarget).find('#notesModal').val(),
             photos: $(event.currentTarget).find('#imageModal').val(),
         });
@@ -146,7 +154,7 @@ function addObservation(observation) {
     let authToken = localStorage.getItem('authToken');
     $.ajax({
         method: 'POST',
-        url: OBSERVATION_URL,
+        url: `${OBSERVATION_URL}`,
         headers: {
             Authorization: `Bearer ${authToken}`
         },
@@ -167,13 +175,14 @@ function addObservation(observation) {
 function deleteObservation(id) {
     let authToken = localStorage.getItem('authToken');
     $.ajax({
-        url: OBSERVATION_URL + '/' + id,
+        url: `${OBSERVATION_URL}/${id}`,
         headers: {
             Authorization: `Bearer ${authToken}`
         },
         method: 'DELETE',
         success: function(data) {
             getObservations(data);
+            location.reload();
         },
         error: function(err) {
             console.log(err);
@@ -181,13 +190,44 @@ function deleteObservation(id) {
     });
 }
 
-function handleDeleteButton() {
-    $('.obs').on('click', '#deleteBtn', (event) => {
-        event.preventDefault();
-        deleteObservation(
-            $(event.currentTarget).closest('.obs').attr('data-id'));
+// //handle update button
+// function handleUpdateButton() {
+//     $('.observations-gallery').on('click', '.updateBtn', function(event) {
+//         console.log('Update button clicked');
+//         // let scientificName = $(event.currentTarget).find('scientificNameModal').val();
+//         // let commonName = $(event.currentTarget).find('#commonNameModal').val();
+//         // let familyName = $(event.currentTarget).find('#familyNameModal').val();
+//         // let location = $(event.currentTarget).find('#locationModal').val();
+//         // let notes = $(event.currentTarget).find('#notesModal').val();
+//         // let photos = $(event.currentTarget).find('#imageModal').val();
+//         // $('#updateScientificName').val(scientificName);
+//         // $('#updateCommonName').val(commonName);
+//         // $('#updateFamily').val(familyName);
+//         // $('#updateLocation').val(location);
+//         // $('#updateNotes').val(notes);
+//         // $('#updateImage').val(photos);
 
-    });
+//         // updateObservation({
+//         //     scientificName: scientificName,
+//         //     commonName: commonName,
+//         //     familyName: familyName,
+//         //     location: location,
+//         //     notes: notes,
+//         //     photos: photos,
+//         // });
+//     });
+// }
+
+//handle delete button event
+function handleDeleteButton() {
+    $('.observations-gallery').on('click', '.deleteBtn', function(event) {
+        console.log('Delete button clicked');
+        let data = $(this).closest('li').attr('data-id');
+        console.log(data);
+        deleteObservation(
+            $(this).closest('li').attr('data-id')
+        );
+    })
 }
 
 function handleLogout() {

@@ -20,6 +20,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* For devices larger than 400px */
 
 @media (min-width: 400px) {
@@ -28,6 +40,18 @@
         padding: 0;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -162,6 +186,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Base Styles
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -182,6 +218,18 @@ body {
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #222;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -242,6 +290,18 @@ h6 {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Larger than phablet */
 
 @media (min-width: 550px) {
@@ -273,6 +333,18 @@ p {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -283,6 +355,18 @@ a {
 a:hover {
     color: #0FA0CE;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -359,6 +443,18 @@ input[type="button"].button-primary:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -380,6 +476,18 @@ select {
     box-shadow: none;
     box-sizing: border-box;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -445,6 +553,18 @@ label>.label-body {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Lists
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -478,6 +598,18 @@ li {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Code
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -496,6 +628,18 @@ pre>code {
     padding: 1rem 1.5rem;
     white-space: pre;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -520,6 +664,18 @@ th:last-child,
 td:last-child {
     padding-right: 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -556,6 +712,18 @@ form {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Utilities
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -582,7 +750,20 @@ form {
     max-width: 100%;
     width: 100%;
     height: auto;
+    overflow: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -597,6 +778,70 @@ hr {
     border-width: 0;
     border-top: 1px solid #E1E1E1;
 }
+
+.separator {
+    position: relative;
+    margin-bottom: 1.7em;
+    padding-bottom: 1.7em;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: inherit;
+    line-height: 0.75;
+}
+
+.separator:before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 86px;
+    height: 2px;
+    background-color: #222;
+
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.separator.orange:before {
+    background-color: #d87843;
+    line-height: 1em;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.vertical-centered {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -615,6 +860,18 @@ hr {
     display: table;
     clear: both;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -646,6 +903,18 @@ there.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Larger than mobile */
 
 @media only screen and (min-width: 400px) {}
@@ -653,9 +922,33 @@ there.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Larger than phablet (also point when grid becomes active) */
 
 @media only screen and(min-width: 550px) {}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -671,9 +964,33 @@ there.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Larger than desktop */
 
 @media only screen and(min-width: 1000px) {}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

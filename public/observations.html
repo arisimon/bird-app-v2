@@ -15,22 +15,51 @@
 </head>
 
 <body>
-    <section class='observations-header'>
-        <div class='container'>
-            <div class='row'>
-                <div class='one-half column'>
-                    <h4>Observations Page</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum a ab atque? Architecto voluptatibus debitis nam autem, aliquid assumenda minima, provident totam quis impedit error explicabo similique, nemo a ipsum.</p>
+    <section id="introduction" class="introduction u-full-width">
+        <div class="container">
+            <div class="row">
+                <div class="twelve columns">
+                    <h3 class="separator">Observations Tracker</h3>
+                    <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</h4>
                     <a href="#newObservation" class="button button-primary" rel="modal:open" type='submit'>Add New Observation</a>
                     <button class='logout' type='button button-primary'>Log Out</button>
                 </div>
             </div>
-    </section>
-    <section>
-        <div class='observations-body container'>
-            <div class='row observations-gallery'></div>
         </div>
     </section>
+    <section class='observation-section'>
+        <div class="row observations-gallery">
+            <ul class="observation-items u-cf">
+    </section>
+    <!-- update modal -->
+    <div id="updateModal" class="modal">
+        <form id='updateModalForm'>
+            <div class='row'>
+                <div class='six columns'>
+                    <h2>Bird</h2>
+                    <label for='updateScientificName'>Scientific Name</label>
+                    <input class='u-full-width' type='text' name='scientificName' id='updateScientificName'>
+                    <label for='updateCommonName'>Common Name</label>
+                    <input class='u-full-width' type='text' name='commonName' id='updateCommonName'>
+                    <label for='updateFamilyName'>Family Name</label>
+                    <input class='u-full-width' type='text' name='familyName' id='updateFamilyName'>
+                </div>
+                <div class='six columns'>
+                    <h2>Location</h2>
+                    <label for='updateLocation'>Address</label>
+                    <input class='u-full-width' id="updateLocation" name='address' type="text"></input>
+                    <h2>Photos</h2>
+                    <label for='updateImage'></label>
+                    <input type="text" name="photos" placeholder="Image URL" id="updateImage"></input>
+                </div>
+            </div>
+            <label for="updateNotes">Observation Notes</label>
+            <textarea class="u-full-width" name='notes' id='updateNotes'></textarea>
+            <input id='updateSubmitModal' class="button-primary" type="submit" value="Update">
+        </form>
+    </div>
+    </div>
+    <!-- new observation modal -->
     <div id="newObservation" class="modal">
         <form id='newObservationForm'>
             <div class='row'>
@@ -46,7 +75,7 @@
                 <div class='six columns'>
                     <h2>Location</h2>
                     <label for='autocomplete'>Address</label>
-                    <input class='u-full-width' id="autocomplete-address" name='location' type="text"></input>
+                    <input class='u-full-width locationModal' id="autocomplete-address" name='location' type="text"></input>
                     <h2>Photos</h2>
                     <label for='imageModal'></label>
                     <input type="text" name="photos" placeholder="Image URL" id="imageModal"></input>
@@ -54,37 +83,9 @@
             </div>
             <label for="notesModal">Observation Notes</label>
             <textarea class="u-full-width" name='notes' id="notesModal"></textarea>
-            <input id='observationSubmitModal' class="button-primary" type="submit" value="Update">
+            <input id='observationSubmitModal' class="button-primary" type="submit" value="Create">
         </form>
     </div>
-    <!-- This is the anchor for update modal -->
-    <!-- <p><a href="#ex1" rel="modal:open">Open Modal</a></p> -->
-    <!-- modal -->
-    <!-- <div id="ex1" class="modal">
-        <form id='modalUpdate' data-id='{{this._id}}'>
-            <div class='row'>
-                <div class='six columns'>
-                    <h2>Bird</h2>
-                    <label for='scientificNameModal'>Scientific Name</label>
-                    <input class='u-full-width' type='text' name='scientific_name' id='scientificNameModal'>
-                    <label for='commonNameModal'>Common Name</label>
-                    <input class='u-full-width' type='text' name='common_name' id='commonNameModal'>
-                    <label for='familyNameModal'>Family Name</label>
-                    <input class='u-full-width' type='text' name='family' id='familyNameModal'>
-                </div>
-                <div class='six columns'>
-                    <h2>Location</h2>
-                    <label for='autocomplete'>Address</label>
-                    <input class='u-full-width locationModal' id="autocomplete" name='address' type="text"></input>
-                    <h2>Photos</h2>
-                    <input class='u-full-width' type='file' id='photoUpload' accept='.png, .jpg, .jpeg .pdf' multiple>
-                </div>
-            </div>
-            <label for="detailsModal">Observation Notes</label>
-            <textarea class="u-full-width" name='details' id="detailsModal"></textarea>
-            <input id='observationSubmitModal' class="button-primary" type="submit" value="Update">
-        </form>
-    </div> -->
     </section>
     <!--     <div>
         <footer class='row'>

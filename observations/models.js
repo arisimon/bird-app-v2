@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const observationSchema = mongoose.Schema({
-    user: { type: String },
+    user: { type: String, required: true },
     name: { type: String },
     scientificName: { type: String },
-    commonName: { type: String },
+    commonName: { type: String, required: true },
     familyName: { type: String },
     location: { type: String },
     notes: { type: String },
