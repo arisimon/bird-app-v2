@@ -24,7 +24,7 @@ function handleEventHandlers() {
 
 //handle Login form
 function handleLoginForm() {
-    $("#login-modal-form").submit(function (event) {
+    $("#login-modal-form").submit(function(event) {
         event.preventDefault();
         let username = $("#username").val();
         console.log(username);
@@ -36,18 +36,18 @@ function handleLoginForm() {
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(userInfo),
-            success: function (data) {
+            success: function(data) {
                 console.log('successfully logged in');
                 localStorage.setItem("authToken", data.authToken);
                 localStorage.setItem("currentUser", username);
                 user = username;
                 $('#login-modal-form').html('Success!');
-                setTimeout(function (data) {
+                setTimeout(function(data) {
                     location.replace('observations.html');
 
                 }, 1000)
             },
-            error: function (err) {
+            error: function(err) {
                 console.log(err);
             }
         }
@@ -59,7 +59,7 @@ function handleLoginForm() {
 
 //handle registration form
 function handleRegForm() {
-    $("#register-modal-form").submit(function (event) {
+    $("#register-modal-form").submit(function(event) {
         event.preventDefault();
         let username = $('#username-rg').val();
         let password = $('#password-rg').val();
@@ -71,14 +71,14 @@ function handleRegForm() {
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(user),
-            success: function (data) {
+            success: function(data) {
                 console.log('successfully registered');
                 $('#register-modal-form').html(`You've created an account!`);
-                setTimeout(function (data) {
+                setTimeout(function(data) {
                     $('#register-modal-form').hide()
                 }, 1000)
             },
-            error: function (err) {
+            error: function(err) {
                 console.log(err);
                 if(password.length < 8) {
                     $("#errorNotLong").html(`<p>Password must be at least 8 characters</p>`)
@@ -100,7 +100,7 @@ function getObservations() {
             Authorization: `Bearer ${authToken}`
         },
         contentType: 'application/json',
-        success: function (data) {
+        success: function(data) {
             console.log(data);
             displayObservations(data);
             console.log('success');
@@ -111,7 +111,7 @@ function getObservations() {
 
 //function to render observations to page
 function displayObservations(observations) {
-    $.each(observations, function (index, value) {
+    $.each(observations, function(index, value) {
         $('.observation-items').append(` 
                 <li class="six columns" data-id= "${value._id}">
                     <img src="${observations[index].photos}">
@@ -164,11 +164,11 @@ function addObservation(observation) {
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(observation),
-        success: function (data) {
+        success: function(data) {
             getObservations(data);
             location.reload(true);
         },
-        error: function (err) {
+        error: function(err) {
             console.log(err);
         }
     });
@@ -176,7 +176,7 @@ function addObservation(observation) {
 
 //handle delete button event
 function handleDeleteButton() {
-    $('.observations-gallery').on('click', '.deleteBtn', function (event) {
+    $('.observations-gallery').on('click', '.deleteBtn', function(event) {
         console.log('Delete button clicked');
         deleteObservation(
             $(this).closest('li').attr('data-id')
@@ -194,11 +194,11 @@ function deleteObservation(id) {
             Authorization: `Bearer ${authToken}`
         },
         method: 'DELETE',
-        success: function (data) {
+        success: function(data) {
             getObservations(data);
             location.reload();
         },
-        error: function (err) {
+        error: function(err) {
             console.log(err);
         }
     });
@@ -206,6 +206,7 @@ function deleteObservation(id) {
 
 function populateUpdateForm(id, element) {
     let authToken = localStorage.getItem('authToken');
+    console.log(id);
     $.ajax({
         method: 'GET',
         url: `${OBSERVATION_URL}/${id}`,
@@ -213,7 +214,7 @@ function populateUpdateForm(id, element) {
             Authorization: `Bearer ${authToken}`
         },
         contentType: 'application/json',
-        success: function (observation) {
+        success: function(observation) {
             console.log(observation);
 
             let updateModalForm = `
@@ -238,7 +239,7 @@ function populateUpdateForm(id, element) {
                 </div>
             </div>
             <label for="updateNotes">Observation Notes</label>
-            <textarea class="u-full-width" name='notes' id='updateNotes'>${observation.notes}</textarea>
+            <textarea class="u-full-width" name='notes' id='updateNotes' maxLength='180'>${observation.notes}</textarea>
             <input id='updateSubmitModal' class="button-primary" type="submit" value="Update">
         </form>`
             $("#updateModal").html(updateModalForm);
@@ -248,7 +249,7 @@ function populateUpdateForm(id, element) {
 
 //handle update button
 function handleUpdateButton() {
-    $('.observations-gallery').on('click', '.updateBtn', function (event) {
+    $('.observations-gallery').on('click', '.updateBtn', function(event) {
         console.log('Update button clicked');
         populateUpdateForm(
             $(this).closest('li').attr('data-id')
@@ -257,20 +258,22 @@ function handleUpdateButton() {
 }
 //handle modal update button
 function handleModalUpdateButton() {
-    $('#updateSubmitModal').on('submit', function (event) {
+    $('.observations-gallery').on('click', '#updateSubmitModal', function(event) {
         event.preventDefault();
         console.log('Update button clicked');
+        let scientificName = $(this).find('#updateScientificName').val();
+        console.log(scientificName);
 
-        updateObservation({
-            user: user,
-            name: name,
-            scientificName: $(this).find('#updateScientificName').val(),
-            commonName: $(this).find('#updateCommonName').val(),
-            familyName: $(this).find('#updateFamily').val(),
-            location: $(this).find('#updateLocation').val(),
-            notes: $(this).find('#updateNotes').val(),
-            photos: $(this).find('#updateImage').val(),
-        });
+        // updateObservation({
+        //     user: user,
+        //     name: name,
+        //     scientificName: $(this).find('#updateScientificName').val(),
+        //     commonName: $(this).find('#updateCommonName').val(),
+        //     familyName: $(this).find('#updateFamily').val(),
+        //     location: $(this).find('#updateLocation').val(),
+        //     notes: $(this).find('#updateNotes').val(),
+        //     photos: $(this).find('#updateImage').val(),
+        // });
     });
 }
 
@@ -287,11 +290,11 @@ function updateObservation(id, observation) {
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(observation),
-        success: function (data) {
+        success: function(data) {
+            console.log(data);
             getObservations(data);
-            location.reload(false);
         },
-        error: function (err) {
+        error: function(err) {
             console.log(err);
         }
     });
@@ -301,7 +304,7 @@ function updateObservation(id, observation) {
 
 
 function handleLogout() {
-    $('.logout').click(function () {
+    $('.logout').click(function() {
         console.log('User has been logged out');
         localStorage.clear();
         user = null;

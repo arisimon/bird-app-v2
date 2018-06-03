@@ -37,7 +37,6 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 });
 
 router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log(`GETting observation ${req.param.id}`);
     Observations
         .findById(req.params.id)
         .exec()
@@ -69,9 +68,9 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 
     //check required fields
     const requiredFields = ['commonName', 'location', 'notes'];
-    for (let i = 0; i < requiredFields.length; i++) {
+    for(let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
-        if (!(field in req.body)) {
+        if(!(field in req.body)) {
             const message = `Missing field ${field} in request body`;
             console.error(message);
             return res.status(400).send(message);
@@ -103,7 +102,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
     const toUpdate = {};
     const updateableFields = ['scientificName', 'commonName', 'familyName', 'location', 'notes', 'photos'];
     updateableFields.forEach((field) => {
-        if (field in req.body) {
+        if(field in req.body) {
             toUpdate[field] = req.body[field];
         } else {
             const message = `Missing ${field} in request body`;
