@@ -8,6 +8,12 @@ function handleEventHandlers() {
     handleLoginForm();
     handleRegForm();
     handleLogout();
+
+    if (location.href.split('/').pop() === 'observations.html' && !$('.observations-gallery').text().length) {
+        console.log('?');
+        getObservations();
+    }
+
 }
 
 
@@ -31,11 +37,11 @@ function handleLoginForm() {
                 localStorage.setItem("authToken", data.authToken);
                 localStorage.setItem("currentUser", username);
                 user = username;
+                $('#login-modal-form').html('Success!');
                 setTimeout(function(data) {
-                    $('#login-modal-form').html('Success!');
-                    location.replace(('observations.html'), 15000);
-                    getObservations();
-                })
+                    location.replace('observations.html');
+
+                }, 1000)
             },
             error: function(err) {
                 console.log(err);
@@ -64,6 +70,9 @@ function handleRegForm() {
             success: function(data) {
                 console.log('successfully registered');
                 $('#register-modal-form').html(`You've created an account!`);
+                setTimeout(function(data) {
+                    $('#register-modal-form').hide()
+                }, 1000)
             },
             error: function(err) {
                 console.log(err);
@@ -76,29 +85,32 @@ function handleRegForm() {
     })
 }
 
+//function to get observations
 function getObservations() {
     let authToken = localStorage.getItem('authToken');
     console.log('Getting observations');
     $.ajax({
         method: 'GET',
-        url: `${OBSERVATION_URL}/user/${user}`,
+        url: `${OBSERVATION_URL}`,
         headers: {
             Authorization: `Bearer ${authToken}`
         },
         contentType: 'application/json',
         success: function(data) {
+            console.log(data);
             displayObservations(data);
         }
     });
 }
 
+//function to render observations to page
 function displayObservations(observation) {
 
     $.each(observation, function(index, value) {
-        $('.observations-body').html(`		
+        $('.observations-gallery').html(`		
         	<div class="row">
 			<div class="three columns">
-				<p>${observation[index].scientific_name}</p>
+				<p>${observation[index].scientificName}</p>
 				<img src="//unsplash.it/600/300" class="u-img-responsive">
 			</div>`)
     });

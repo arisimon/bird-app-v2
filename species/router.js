@@ -4,10 +4,10 @@ const express = require('express');
 const config = require('../config');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-const urlParser = bodyParser.urlencoded({ extended: true});
+const urlParser = bodyParser.urlencoded({ extended: true });
 const mongoose = require('mongoose');
 const router = express.Router();
-const {Species} = require('./models');
+const { Species } = require('./models');
 const passport = require('passport');
 
 
@@ -16,16 +16,16 @@ router.use(jsonParser);
 router.use(urlParser);
 
 //Authentication
-const {localStrategy, jwtStrategy } = require('../auth/strategies');
+const { localStrategy, jwtStrategy } = require('../auth/strategies');
 
 passport.use('local', localStrategy);
 passport.use(jwtStrategy);
 
 
 //GET request for all species
-router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
     console.log('GETting all species')
-	 Species
+    Species
         .find()
         .exec()
         .then(species => {
@@ -37,13 +37,12 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 })
 
 
-
 // //function to format query strings
 // function escapeRegex(text) {
 //     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 // };
 // //GET species based off search input, if not found get all species
-// router.get('/', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+// router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
 //     console.log('Received a GET request to find species');
 //     console.log(req.query);
 //     let noMatch = null;
@@ -62,21 +61,20 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 //     } else {
 //         // Get all species from DB
 //         Species
-//         .find()
-//         .exec()
-//         .then(species => {
-//             res.status(200).json(species)
-//         })
-//         .catch(err => {
-//             res.status(500).json({ message: 'Internal server error' });
-//         })
+//             .find()
+//             .exec()
+//             .then(species => {
+//                 res.status(200).json(species)
+//             })
+//             .catch(err => {
+//                 res.status(500).json({ message: 'Internal server error' });
+//             })
 //     }
 // });
 
 
-
 //GET request by ID
-router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     console.log(`GETting species with ID: ${req.param.id}`);
     Species
         .findById(req.params.id)
@@ -91,4 +89,4 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) =>
 
 
 
-module.exports = {router};
+module.exports = { router };

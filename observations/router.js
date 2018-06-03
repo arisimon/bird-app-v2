@@ -23,7 +23,7 @@ passport.use('local', localStrategy);
 passport.use(jwtStrategy);
 
 //GET routes
-router.get('/', /*passport.authenticate('jwt', {session: false}),*/ (req, res) => {
+router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
     console.log('GETting all observations');
     Observations
         .find()

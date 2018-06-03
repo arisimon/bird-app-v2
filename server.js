@@ -7,10 +7,6 @@ const logger = require('morgan');
 const fs = require('fs');
 const path = require('path');
 const passport = require('passport');
-const multer = require('multer');
-const uploads = multer({
-    dest: 'uploads'
-});
 
 //import configuration files/schema
 const { PORT, TEST_DATABASE_URL, DATABASE_URL } = require('./config');
