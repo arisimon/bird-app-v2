@@ -32,6 +32,13 @@
 
 
 
+
+
+
+
+
+
+
 /* For devices larger than 400px */
 
 @media (min-width: 400px) {
@@ -40,6 +47,13 @@
         padding: 0;
     }
 }
+
+
+
+
+
+
+
 
 
 
@@ -198,6 +212,13 @@
 
 
 
+
+
+
+
+
+
+
 /* Base Styles
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -218,17 +239,6 @@ body {
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #222;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -291,18 +301,7 @@ h6 {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* Larger than phablet */
+/* Larger than tablet */
 
 @media (min-width: 550px) {
     h1 {
@@ -334,17 +333,6 @@ p {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -355,19 +343,6 @@ a {
 a:hover {
     color: #0FA0CE;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -441,20 +416,6 @@ input[type="button"].button-primary:focus {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -476,17 +437,6 @@ select {
     box-shadow: none;
     box-sizing: border-box;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -552,19 +502,6 @@ label>.label-body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Lists
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -597,19 +534,6 @@ li {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Code
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -628,20 +552,6 @@ pre>code {
     padding: 1rem 1.5rem;
     white-space: pre;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -664,19 +574,6 @@ th:last-child,
 td:last-child {
     padding-right: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -707,18 +604,6 @@ ol,
 form {
     margin-bottom: 2.5rem;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -756,19 +641,6 @@ form {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -781,13 +653,11 @@ hr {
 
 .separator {
     position: relative;
-    margin-bottom: 1.7em;
-    padding-bottom: 1.7em;
+    padding-bottom: 1em;
+    padding-top: 0.5em;
     text-align: center;
     font-weight: bold;
-    text-transform: uppercase;
     color: inherit;
-    line-height: 0.75;
 }
 
 .separator:before {
@@ -822,25 +692,9 @@ hr {
 }
 
 .vertical-centered {
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
     width: 100%;
+    overflow: scroll;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -860,17 +714,6 @@ hr {
     display: table;
     clear: both;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -902,53 +745,15 @@ there.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Larger than mobile */
 
 @media only screen and (min-width: 400px) {}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Larger than phablet (also point when grid becomes active) */
 
 @media only screen and(min-width: 550px) {}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -964,33 +769,9 @@ there.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* Larger than desktop */
 
 @media only screen and(min-width: 1000px) {}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
