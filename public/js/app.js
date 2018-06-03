@@ -8,9 +8,10 @@ function handleEventHandlers() {
     handleLoginForm();
     handleRegForm();
     handleLogout();
+    handleAddObservation();
+    handleDeleteButton();
 
     if (location.href.split('/').pop() === 'observations.html' && !$('.observations-gallery').text().length) {
-        console.log('?');
         getObservations();
     }
 
@@ -104,15 +105,88 @@ function getObservations() {
 }
 
 //function to render observations to page
-function displayObservations(observation) {
+function displayObservations(observations) {
 
-    $.each(observation, function(index, value) {
-        $('.observations-gallery').html(`		
-        	<div class="row">
-			<div class="three columns">
-				<p>${observation[index].scientificName}</p>
-				<img src="//unsplash.it/600/300" class="u-img-responsive">
+    $.each(observations, function(index, value) {
+        $('.observations-gallery').append(`		
+			<div class="three columns obs" data-id: ${value._id}>
+				<p>${observations[index].scientificName}</p>
+				<p>${observations[index].commonName}</p>
+				<p>${observations[index].familyName}</p>
+				<p>${observations[index].location}</p>
+				<p>${observations[index].obsDate}</p>
+				<p>${observations[index].notes}</p>
+				<img src="${observations[index].photos}" class="u-img-responsive">
+				<input id='updateBtn' class="button-primary" type="button" value="Update">
+				<input id='deleteBtn' class="button-primary" type="button" value="Delete">
 			</div>`)
+    });
+}
+
+
+function handleAddObservation() {
+    $('#newObservation').on('submit', event => {
+        event.preventDefault();
+        addObservation({
+            user: user,
+            scientificName: $(event.currentTarget).find('#scientificNameModal').val(),
+            commonName: $(event.currentTarget).find('#commonNameModal').val(),
+            familyName: $(event.currentTarget).find('#familyNameModal').val(),
+            location: $(event.currentTarget).find('#autocomplete-address').val(),
+            notes: $(event.currentTarget).find('#notesModal').val(),
+            photos: $(event.currentTarget).find('#imageModal').val(),
+        });
+        console.log('A new observation was added!');
+    })
+}
+
+
+//create a new observation
+function addObservation(observation) {
+    let authToken = localStorage.getItem('authToken');
+    $.ajax({
+        method: 'POST',
+        url: OBSERVATION_URL,
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        },
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(observation),
+        success: function(data) {
+            getObservations(data);
+            location.reload(true);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+}
+
+//delete observation
+function deleteObservation(id) {
+    let authToken = localStorage.getItem('authToken');
+    $.ajax({
+        url: OBSERVATION_URL + '/' + id,
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        },
+        method: 'DELETE',
+        success: function(data) {
+            getObservations(data);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+}
+
+function handleDeleteButton() {
+    $('.obs').on('click', '#deleteBtn', (event) => {
+        event.preventDefault();
+        deleteObservation(
+            $(event.currentTarget).closest('.obs').attr('data-id'));
+
     });
 }
 

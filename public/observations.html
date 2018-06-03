@@ -21,9 +21,7 @@
                 <div class='one-half column'>
                     <h4>Observations Page</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum a ab atque? Architecto voluptatibus debitis nam autem, aliquid assumenda minima, provident totam quis impedit error explicabo similique, nemo a ipsum.</p>
-                    <a href="#newObservation" class="button button-primary" rel="modal:open">Add New Observation</a>
-                </div>
-                <div class='u-pull-right'>
+                    <a href="#newObservation" class="button button-primary" rel="modal:open" type='submit'>Add New Observation</a>
                     <button class='logout' type='button button-primary'>Log Out</button>
                 </div>
             </div>
@@ -39,22 +37,23 @@
                 <div class='six columns'>
                     <h2>Bird</h2>
                     <label for='scientificNameModal'>Scientific Name</label>
-                    <input class='u-full-width' type='text' name='scientific_name' id='scientificNameModal'>
+                    <input class='u-full-width' type='text' name='scientificName' id='scientificNameModal'>
                     <label for='commonNameModal'>Common Name</label>
-                    <input class='u-full-width' type='text' name='common_name' id='commonNameModal'>
+                    <input class='u-full-width' type='text' name='commonName' id='commonNameModal'>
                     <label for='familyNameModal'>Family Name</label>
-                    <input class='u-full-width' type='text' name='family' id='familyNameModal'>
+                    <input class='u-full-width' type='text' name='familyName' id='familyNameModal'>
                 </div>
                 <div class='six columns'>
                     <h2>Location</h2>
                     <label for='autocomplete'>Address</label>
-                    <input class='u-full-width locationModal' id="autocomplete-address" name='address' type="text"></input>
+                    <input class='u-full-width' id="autocomplete-address" name='location' type="text"></input>
                     <h2>Photos</h2>
-                    <input class='u-full-width' type='file' id='photoUpload' accept='.png, .jpg, .jpeg .pdf' multiple>
+                    <label for='imageModal'></label>
+                    <input type="text" name="photos" placeholder="Image URL" id="imageModal"></input>
                 </div>
             </div>
-            <label for="detailsModal">Observation Notes</label>
-            <textarea class="u-full-width" name='details' id="detailsModal"></textarea>
+            <label for="notesModal">Observation Notes</label>
+            <textarea class="u-full-width" name='notes' id="notesModal"></textarea>
             <input id='observationSubmitModal' class="button-primary" type="submit" value="Update">
         </form>
     </div>
@@ -87,9 +86,11 @@
         </form>
     </div> -->
     </section>
-    <footer class='row'>
-        <p>Created by Ari Simon</p>
-    </footer>
+    <!--     <div>
+        <footer class='row'>
+            <p>Created by Ari Simon</p>
+        </footer>
+    </div> -->
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3lBrBZp1PAbL86KyQVgzf2RyPSqIkx4M&libraries=places"></script>

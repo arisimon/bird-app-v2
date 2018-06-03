@@ -65,6 +65,7 @@ router.get('/user/:user', passport.authenticate('jwt', { session: false }), (req
 //POST route
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
     console.log('POSTing a new observation');
+    console.log(req.body);
 
     //check required fields
     const requiredFields = ['commonName', 'location', 'notes'];
@@ -79,6 +80,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 
     Observations
         .create({
+            user: req.body.user,
             scientificName: req.body.scientificName,
             commonName: req.body.commonName,
             familyName: req.body.familyName,
