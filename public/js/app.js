@@ -10,7 +10,7 @@ function handleEventHandlers() {
     handleLogout();
     handleAddObservation();
     handleDeleteButton();
-    // handleUpdateButton();
+    handleModalUpdateButton();
 
     if (location.href.split('/').pop() === 'observations.html' && !$('.observations-items').text().length) {
         getObservations();
@@ -140,7 +140,7 @@ function handleAddObservation() {
             scientificName: $(event.currentTarget).find('scientificNameModal').val(),
             commonName: $(event.currentTarget).find('#commonNameModal').val(),
             familyName: $(event.currentTarget).find('#familyNameModal').val(),
-            location: $(event.currentTarget).find('#locationModal').val(),
+            location: $(event.currentTarget).find('.locationModal').val(),
             notes: $(event.currentTarget).find('#notesModal').val(),
             photos: $(event.currentTarget).find('#imageModal').val(),
         });
@@ -171,8 +171,19 @@ function addObservation(observation) {
     });
 }
 
+//handle delete button event
+function handleDeleteButton() {
+    $('.observations-gallery').on('click', '.deleteBtn', function(event) {
+        console.log('Delete button clicked');
+        deleteObservation(
+            $(this).closest('li').attr('data-id')
+        );
+    })
+}
+
 //delete observation
 function deleteObservation(id) {
+    console.log(`Deleting observation ${id}`)
     let authToken = localStorage.getItem('authToken');
     $.ajax({
         url: `${OBSERVATION_URL}/${id}`,
@@ -190,45 +201,61 @@ function deleteObservation(id) {
     });
 }
 
-// //handle update button
-// function handleUpdateButton() {
-//     $('.observations-gallery').on('click', '.updateBtn', function(event) {
-//         console.log('Update button clicked');
-//         // let scientificName = $(event.currentTarget).find('scientificNameModal').val();
-//         // let commonName = $(event.currentTarget).find('#commonNameModal').val();
-//         // let familyName = $(event.currentTarget).find('#familyNameModal').val();
-//         // let location = $(event.currentTarget).find('#locationModal').val();
-//         // let notes = $(event.currentTarget).find('#notesModal').val();
-//         // let photos = $(event.currentTarget).find('#imageModal').val();
-//         // $('#updateScientificName').val(scientificName);
-//         // $('#updateCommonName').val(commonName);
-//         // $('#updateFamily').val(familyName);
-//         // $('#updateLocation').val(location);
-//         // $('#updateNotes').val(notes);
-//         // $('#updateImage').val(photos);
+//handle update button
+function handleModalUpdateButton() {
+    $('#updateSubmitModal').on('submit', function(event) {
+        event.preventDefault();
+        console.log('Update button clicked');
+        // let scientificName = $(event.currentTarget).find('scientificNameModal').val();
+        // let commonName = $(event.currentTarget).find('#commonNameModal').val();
+        // let familyName = $(event.currentTarget).find('#familyNameModal').val();
+        // let location = $(event.currentTarget).find('.locationModal').val();
+        // let notes = $(event.currentTarget).find('#notesModal').val();
+        // let photos = $(event.currentTarget).find('#imageModal').val();
+        // $('#updateScientificName').val(scientificName);
+        // $('#updateCommonName').val(commonName);
+        // $('#updateFamily').val(familyName);
+        // $('.updateLocation').val(location);
+        // $('#updateNotes').val(notes);
+        // $('#updateImage').val(photos);
 
-//         // updateObservation({
-//         //     scientificName: scientificName,
-//         //     commonName: commonName,
-//         //     familyName: familyName,
-//         //     location: location,
-//         //     notes: notes,
-//         //     photos: photos,
-//         // });
-//     });
-// }
-
-//handle delete button event
-function handleDeleteButton() {
-    $('.observations-gallery').on('click', '.deleteBtn', function(event) {
-        console.log('Delete button clicked');
-        let data = $(this).closest('li').attr('data-id');
-        console.log(data);
-        deleteObservation(
-            $(this).closest('li').attr('data-id')
-        );
-    })
+        updateObservation({
+            user: user,
+            name: name,
+            scientificName: $(this).find('#updateScientificName').val(),
+            commonName: $(this).find('#updateCommonName').val(),
+            familyName: $(this).find('#updateFamily').val(),
+            location: $(this).find('#updateLocation').val(),
+            notes: $(this).find('#updateNotes').val(),
+            photos: $(this).find('#updateImage').val(),
+        });
+    });
 }
+
+//update observation
+function updateObservation(id, observation) {
+    console.log(`Updating observation ${id}`);
+    let authToken = localStorage.getItem('authToken');
+    $.ajax({
+        url: `${OBSERVATION_URL}/${id}`,
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        },
+        method: 'PUT',
+        dateType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(observation),
+        success: function(data) {
+            getObservations(data);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+}
+
+
+
 
 function handleLogout() {
     $('.logout').click(function() {

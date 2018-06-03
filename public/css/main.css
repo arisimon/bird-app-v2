@@ -15,10 +15,6 @@
     text-align: center;
 }
 
-.modal input {
-    text-align: center;
-}
-
 #register-modal input {
     width: 65%;
 }
@@ -103,6 +99,8 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+
+.observation-detail button {}
 
 .observation-items li:hover .observation-detail {
     opacity: 1;

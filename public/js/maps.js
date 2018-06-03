@@ -1,5 +1,12 @@
-var input = document.getElementById('autocomplete-address');
-var autocomplete = new google.maps.places.Autocomplete(input);
+function initialize() {
 
-var input = document.getElementById('autocomplete-update-address');
-var autocomplete = new google.maps.places.Autocomplete(input);
+    var acInputs = document.getElementsByClassName("autocomplete");
+
+    for (var i = 0; i < acInputs.length; i++) {
+
+        var autocomplete = new google.maps.places.Autocomplete(acInputs[i]);
+        autocomplete.inputId = acInputs[i].id;
+    }
+}
+
+initialize();
