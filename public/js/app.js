@@ -242,7 +242,7 @@ function populateUpdateForm(id, element) {
             <textarea class="u-full-width" name='notes' id='updateNotes' maxLength='180'>${observation.notes}</textarea>
             <input id='updateSubmitModal' class="button-primary" type="submit" value="Update">
         </form>`
-            $("#updateModal").html(updateModalForm);
+            $("#updateModal").append(updateModalForm);
         }
     });
 }
@@ -258,7 +258,7 @@ function handleUpdateButton() {
 }
 //handle modal update button
 function handleModalUpdateButton() {
-    $('.observations-gallery').on('click', '#updateSubmitModal', function(event) {
+    $('#updateSubmitModal').on('click', function(event) {
         event.preventDefault();
         console.log('Update button clicked');
         let scientificName = $(this).find('#updateScientificName').val();

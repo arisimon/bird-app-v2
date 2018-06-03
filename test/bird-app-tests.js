@@ -6,13 +6,23 @@
 // const { Observations } = require('../observations/models');
 // const { Species } = require('../species/models');
 // const { app, runServer, closeServer } = require('../server');
-// const {JWT_EXPIRY, JWT_SECRET, TEST_DATABASE_URL} = require('../config');
+// const { JWT_EXPIRY, JWT_SECRET, TEST_DATABASE_URL } = require('../config');
 
 // const should = chai.should();
 
 // chai.use(chaiHttp);
 
 
+// let loginDetails = {
+//     'username': 'test',
+//     'password': 'password'
+// }
+
+// let testUsername = 'test';
+
+// let testPassword = 'password'
+
+// let authToken;
 
 
 // //Seed database
@@ -27,26 +37,13 @@
 //     };
 // }
 
-// // function makeUser(username, password) {
-// //     let newUser = new User ({
-// //         username: username,
-// //         password: password
-// //     });
-// //     newUser.save((err)=>{
-// //         if(err) {
-// //             throw err;
-// //         }
-// //     });
-// // }
 
 // function seedData() {
 //     const seedData = [];
-//     for (let i = 0; i < 10; i++) {
+//     for(let i = 0; i < 10; i++) {
 //         seedData.push(generateObservation());
 //     }
 //     Observations.insertMany(seedData);
-//     // User.(makeUser("Bob", "password1234"));
-//     // makeUser("Bob", "$2a$10$BBLqhvvabdL2Bff.h9U2KelBD9gqPcWMQOYOWscPjvA4brB1/5a3C");
 // }
 
 // function tearDownDb() {
@@ -75,36 +72,34 @@
 //         return closeServer();
 //     });
 
-//     // describe('/POST Register', function() {
-//     // 	it('should Register, and check token', function(done) {
-//     // 		chai.request(app)
-//     // 			.post('/users/')
-//     // 			.send(loginDetails)
-//     // 			.then(function(err, res) {
-//     // 				res.should.have.status(201);
-//     // 				chai.request(app)
-//     // 			})
-//     // 		done();
-//     // 	})
-//     // })
+//     describe('/POST Register', function() {
+//         it('should Register, and check token', function(done) {
+//             chai.request(app)
+//                 .post('/users/')
+//                 .send(loginDetails)
+//                 .then(function(err, res) {
+//                     res.should.have.status(201);
+//                     chai.request(app)
+//                 })
+//             done();
+//         })
+//     })
 
-//     // describe('/POST Login', function() {
-//     // 	it('should Login, and check token', function(done) {
-//     // 		chai.request(app)
-//     // 			.post('/auth/login')
-//     // 			.send(loginDetails)
-//     // 			.then(function(err, res) {
-//     // 				res.should.have.status(200);
-//     // 				authToken = res.body.authToken;
-//     // 				console.log("authToken at login =" + authToken);
-//     // 				// login
-//     // 				chai.request(app)
-//     // 			})
-//     // 		done();
-//     // 	})
-//     // })
+//     describe('/POST Login', function() {
+//         it('should Login, and check token', function(done) {
+//             chai.request(app)
+//                 .post('/auth/login')
+//                 .send(loginDetails)
+//                 .then(function(err, res) {
+//                     res.should.have.status(200);
+//                     authToken = res.body.authToken;
+//                     chai.request(app)
+//                 })
+//             done();
+//         })
+//     })
 
-//     describe('Test all endpoints', function() {
+//     describe('Test all observation endpoints', function() {
 //         beforeEach(function() {
 //             return generateObservation();
 //         });
@@ -114,10 +109,9 @@
 
 //         it('GET should return all observations', function(done) {
 //             let res;
-//             // console.log("authToken=" + authToken);
 //             chai.request(app)
 //                 .get('/observations')
-//                 // .set('Authorization', `Bearer ${authToken}`)
+//                 .set('Authorization', `Bearer ${authToken}`)
 //                 .then(function(_res) {
 //                     res = _res;
 //                     res.should.have.status(200);
