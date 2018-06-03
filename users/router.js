@@ -30,7 +30,7 @@ router.post('/', jsonParser, (req, res) => {
         return res.status(422).json({
             code: 422,
             reason: 'ValidationError',
-            message: 'Incorrect field type: expected string',
+            message: 'Incorrect Field Type: Expected String',
             location: nonStringField
         });
     }
@@ -45,7 +45,7 @@ router.post('/', jsonParser, (req, res) => {
         return res.status(422).json({
             code: 422,
             reason: 'ValidationError',
-            message: 'Cannot start or end with whitespace',
+            message: 'Cannot start or end With whitespace',
             location: nonTrimmedField
         });
     }
@@ -77,8 +77,7 @@ router.post('/', jsonParser, (req, res) => {
             reason: 'ValidationError',
             message: tooSmallField ?
                 `Must be at least ${sizedFields[tooSmallField]
-          .min} characters long` :
-                `Must be at most ${sizedFields[tooLargeField]
+          .min} characters long` : `Must be at most ${sizedFields[tooLargeField]
           .max} characters long`,
             location: tooSmallField || tooLargeField
         });
@@ -114,21 +113,22 @@ router.post('/', jsonParser, (req, res) => {
         })
         .then(user => {
             console.log(`New user is ${user}`);
-            return res.status(201).json(user.serialize());
+            return res.status(201).json(user);
         })
         .catch(err => {
             if (err.reason === 'ValidationError') {
                 return res.status(err.code).json(err);
             }
-            res.status(500).json({ code: 500, message: 'Internal server error' });
+            res.status(500).json({ code: 500, message: err.message });
         });
 });
 
 
 router.get('/', (req, res) => {
     return User.find()
-        .then(users => res.json(users.map(user => user.serialize())))
+        .then(users => res.json(users.map(user => user)))
         .catch(err => res.status(500).json({ message: 'Internal server error' }));
 });
+
 
 module.exports = { router };

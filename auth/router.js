@@ -26,8 +26,8 @@ const localAuth = passport.authenticate('local', { session: false });
 
 
 router.post('/login', localAuth, (req, res) => {
-    //something in Passport authenticate attaches additional ability (like "user") onto request object (could not have called this "blah")
-    const authToken = createAuthToken(req.user.serialize());
+    console.log(req.user);
+    const authToken = createAuthToken(req.user);
     res.json({ authToken });
 });
 

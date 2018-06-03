@@ -34,6 +34,7 @@ function handleLoginForm() {
                 setTimeout(function(data) {
                     $('#login-modal-form').html('Success!');
                     location.replace(('observations.html'), 15000);
+                    getObservations();
                 })
             },
             error: function(err) {
@@ -86,7 +87,6 @@ function getObservations() {
         },
         contentType: 'application/json',
         success: function(data) {
-            alert(data);
             displayObservations(data);
         }
     });

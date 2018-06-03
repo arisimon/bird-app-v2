@@ -17,13 +17,13 @@ router.use(urlParser);
 
 
 //Authentication
-const {localStrategy, jwtStrategy } = require('../auth/strategies');
+const { localStrategy, jwtStrategy } = require('../auth/strategies');
 
 passport.use('local', localStrategy);
 passport.use(jwtStrategy);
 
 //GET routes
-router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/', /*passport.authenticate('jwt', {session: false}),*/ (req, res) => {
     console.log('GETting all observations');
     Observations
         .find()
@@ -36,7 +36,7 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
         })
 });
 
-router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     console.log(`GETting observation ${req.param.id}`);
     Observations
         .findById(req.params.id)
@@ -49,21 +49,21 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) =>
 });
 
 
-router.get('/user/:user', passport.authenticate('jwt', {session: false}), (req, res) => {
-	Garden
-		.find({user: `${req.params.user}`})
-		.exec()
-		.then(plants => {
-			res.status(200).json(plants)
-		})
-		.catch(err => {
-			res.status(500).json({message: 'Internal server error'});
-		})
+router.get('/user/:user', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Observations
+        .find({ user: `${req.params.user}` })
+        .exec()
+        .then(observations => {
+            res.status(200).json(observations)
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Internal server error' });
+        })
 });
 
 
 //POST route
-router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
     console.log('POSTing a new observation');
 
     //check required fields
@@ -95,7 +95,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 
 
 //PUT route
-router.put('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     console.log(`Updating observation ${req.params.id}`);
 
     const toUpdate = {};
@@ -120,7 +120,7 @@ router.put('/:id', passport.authenticate('jwt', {session: false}), (req, res) =>
 
 
 //DELETE route
-router.delete('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     Observations
         .findByIdAndRemove(req.params.id)
         .then(observations => res.json({ data: req.params.id }).status(204).end())
