@@ -87,9 +87,12 @@ router.get('/:id', jsonParser, passport.authenticate('jwt', { session: false }),
 
 function escapeRegex(text) {
     console.log(text);
-    text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-    return text;
-    console.log(text);
+    let object = (Object.keys(text));
+    console.log(object);
+    let format = object.toString();
+    console.log(format);
+    format.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+    return format;
 };
 
 
