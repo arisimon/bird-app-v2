@@ -5,9 +5,26 @@
     box-sizing: border-box;
 }
 
+.modal {
+    background: #EAD2AC;
+}
+.introduction {
+    background: #EABA6B;
+    border-radius: 1000px;
+    margin-top: 20px;
+}
+
 .login-section {
     text-align: center;
     margin-top: 10%;
+    background: #EABA6B;
+    border-radius: 1000px;
+    height: 300px;
+    box-shadow: 2px 4px 5px grey;
+}
+
+.login-section h2 {
+    padding-top: 50px;
 }
 
 #login-modal,
@@ -40,6 +57,18 @@
     text-align: center;
 }
 
+#newObservationForm {
+    text-align: center;
+}
+
+#newObservationForm h2 {
+    text-decoration: underline;
+    color: #0081AF;
+}
+
+.observation-description {
+    text-align: center;
+}
 .observation-items {
     list-style: none;
     width: 100%;
@@ -54,7 +83,7 @@
     height: 360px;
     margin: 0!important;
     width: 33%;
-    border: 10px solid white;
+    border: 5px solid #0081AF;
     box-shadow: 0 1px 0 rgba(0, 0, 0, .15);
 
     position: relative;
@@ -76,7 +105,9 @@
     font-size: 1.25em;
 }
 
-
+.common-name-text {
+    font-size: 20px;
+}
 .observation-detail {
     position: absolute;
     top: 0;
@@ -85,9 +116,10 @@
     right: 0;
 
     opacity: 0;
-    background: rgba(0, 0, 0, .75);
+    background: #1F2B38;
     color: white;
     overflow: scroll;
+    border-radius: 10px;
 
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
@@ -102,15 +134,21 @@
 }
 
 .observation-detail p {
-    font-size: 17px;
     padding-left: 20px;
     padding-right: 20px;
+}
+
+.style-search {
+    border-radius: 1000px;
+    background: #EABA6B;
+    margin-top: 150px;
+    padding: 50px;
 }
 
 
 .observation-items li:hover .observation-detail {
     opacity: 1;
-    box-shadow: inset 0 0 0 10px #222;
+    box-shadow: inset 0 0 0 10px #1C2733;
 }
 
 .search-section {
@@ -123,6 +161,8 @@
 
 .species-search-label {
     text-align: center;
+    font-size: 28px;
+    font-weight: 500;
 }
 
 footer {

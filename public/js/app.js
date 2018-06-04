@@ -1,7 +1,7 @@
 'use strict';
 
 let OBSERVATION_URL = 'observations';
-let SPECIES_URL = 'species';
+let SPECIES_URL = '/api/species';
 let user = localStorage.getItem('currentUser');
 
 function handleEventHandlers() {
@@ -12,6 +12,7 @@ function handleEventHandlers() {
     handleDeleteButton();
     handleUpdateButton();
     handleModalUpdateButton();
+    handleSpeciesSearchButton();
 
     if(location.href.split('/').pop() === 'observations.html' && !$('.observations-items').text().length) {
         getObservations();
@@ -106,6 +107,9 @@ function getObservations() {
             console.log(data);
             displayObservations(data);
             console.log('success');
+        },
+        error: function(err) {
+            console.log(err);
         }
     });
 }
@@ -115,14 +119,14 @@ function getObservations() {
 function displayObservations(observations) {
     $.each(observations, function(index, value) {
         $('.observation-items').append(` 
-                <li class="six columns" data-id= "${value._id}">
-                    <img src="${observations[index].photos}">
+                <li class="six columns observation-li" data-id= "${value._id}">
+                    <img class='u-img-responsive' src="${observations[index].photos}">
             <div class="observation-detail">
                 <div class="vertical-centered">
-                    <p class="separator orange">${observations[index].commonName}</p>
+                    <p class="separator orange common-name-text">${observations[index].commonName}</p>
                    <p><strong>Scientific Name:</strong> ${observations[index].scientificName}</p>
                    <p><strong>Family:</strong> ${observations[index].familyName}</p>
-                   <p><strong>Observation Location:</strong> <br> ${observations[index].location}</p>
+                   <p><strong>Observation Location:</strong> ${observations[index].location}</p>
                    <p class='notesText'><strong>Notes:</strong><br> ${observations[index].notes}</p>
                    <div class='button-container'>
                     <a class='updateBtn button button-primary' rel="modal:open" href='#updateModal' type='submit'>Update</a>
@@ -245,7 +249,11 @@ function populateUpdateForm(id, element) {
             <input id='updateSubmitModal' class="button-primary" type="submit" value="Update">
         </form>`
             $("#renderModal").html(updateModalForm);
+        },
+        error: function(err) {
+            console.log(err);
         }
+
     });
 }
 
@@ -264,11 +272,6 @@ function handleModalUpdateButton() {
         event.preventDefault();
         console.log('Update button clicked');
         let id = $(this).closest('form').attr('data-id');
-        console.log(id);
-        let family = $(this).find('#updateFamilyName').val();
-        console.log(family);
-        let x = $(this).find('.updateLocation').val();
-        console.log(x);
 
         updateObservation(id, {
             user: user,
@@ -308,7 +311,48 @@ function updateObservation(id, observation) {
     });
 }
 
+function handleSpeciesSearchButton() {
+    $('#species-search-form').on('submit', function(event) {
+        event.preventDefault();
+        let input = $('#species-search').val();
+        speciesSearch(input);
+    })
+}
 
+function speciesSearch(input) {
+    let authToken = localStorage.getItem('authToken');
+    console.log(input);
+    console.log('Searching for bird information');
+    $.ajax({
+        method: 'GET',
+        url: `${SPECIES_URL}`,
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        },
+        contentType: 'application/json',
+        data: JSON.stringify(input),
+        success: function(data) {
+            displaySpecies(data);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    })
+}
+
+function displaySpecies(species) {
+    $.each(species, function(index, value) {
+        $('.search-results').append(` 
+            <div class='row'>
+                <div class='ul-full-width species-div'>
+                    <h4><strong>Common Name:</strong> ${species[index].scientific_name}</h4>
+                    <p><strong>Scientific Name:</strong> ${species[index].common_name}</p>
+                    <p><strong>Family:</strong> ${species[index].family_name}</p>
+                </div>
+            </div>
+            `)
+    });
+}
 
 
 function handleLogout() {

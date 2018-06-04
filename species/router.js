@@ -37,13 +37,11 @@ passport.use(jwtStrategy);
 // })
 
 
-//function to format query strings
-function escapeRegex(text) {
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-};
 //GET species based off search input, if not found get all species
 router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
     console.log('Received a GET request to find species');
+    console.log(req.query.search);
+
     let noMatch = null;
     if(req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
@@ -74,7 +72,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), function(req, 
 
 
 //GET request by ID
-router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/:id', jsonParser, passport.authenticate('jwt', { session: false }), (req, res) => {
     console.log(`GETting species with ID: ${req.param.id}`);
     Species
         .findById(req.params.id)
@@ -85,6 +83,14 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
             res.status(500).json({ message: 'Internal server error' })
         })
 });
+
+
+function escapeRegex(text) {
+    console.log(text);
+    text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+    return text;
+    console.log(text);
+};
 
 
 

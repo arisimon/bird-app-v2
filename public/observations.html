@@ -20,10 +20,10 @@
             <div class="twelve columns">
                 <h3 class="separator">Observations Tracker</h3>
                 <div class='button-container'>
-                    <button class='logout' type='button button-primary'>Log Out</button>
+                    <button class='logout button-primary button' type='button'>Log Out</button>
                 </div>
-                <div class='container'>
-                    <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</h4>
+                <div class='container observation-description'>
+                    <h4>Do you love to bird watch? Keep track of your bird observations in this fun journal!</h4>
                 </div>
                 <div class='button-container'>
                     <a href="#newObservation" class="button button-primary" rel="modal:open" type='submit'>Add New Observation</a>
@@ -47,7 +47,7 @@
         <div id="newObservation" class="modal">
             <form id='newObservationForm'>
                 <div class='row'>
-                    <div class='six columns'>
+                    <div class='ul-full-width'>
                         <h2>Bird</h2>
                         <label for='scientificNameModal'>Scientific Name</label>
                         <input class='u-full-width' type='text' name='scientificName' id='scientificNameModal'>
@@ -55,14 +55,12 @@
                         <input class='u-full-width' type='text' name='commonName' id='commonNameModal'>
                         <label for='familyNameModal'>Family Name</label>
                         <input class='u-full-width' type='text' name='familyName' id='familyNameModal'>
-                    </div>
-                    <div class='six columns'>
                         <h2>Location</h2>
                         <label for='autocomplete'>Address</label>
                         <input class='u-full-width autocomplete locationModal' id="ac1" name='location' type="text"></input>
                         <h2>Photos</h2>
                         <label for='imageModal'></label>
-                        <input type="text" name="photos" placeholder="Image URL" id="imageModal"></input>
+                        <input type="text" class='u-full-width' name="photos" id="imageModal"></input>
                     </div>
                 </div>
                 <label for="notesModal">Observation Notes</label>

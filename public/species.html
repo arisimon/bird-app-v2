@@ -21,29 +21,32 @@
             <div class="twelve columns">
                 <h3 class="separator">Bird Search</h3>
                 <div class='button-container'>
-                    <button class='logout' type='button button-primary'>Log Out</button>
+                    <button id='logout' class='button button-primary' type='button'>Log Out</button>
                     <a href='/observations.html' id='go-back' class='button button-primary' type='button'>Go back</a>
                 </div>
                 <div>
-                    <h4 class='species-search-header'>Want to learn more about your bird species? Find their scientific name and family name here!</h4>
+                    <h4 class='species-search-header'>Want to learn more about your bird species? <br>Find their scientific name and family name here!</h4>
                 </div>
             </div>
     </section>
     <section class='search-section u-full-width'>
         <form id='species-search-form'>
-            <div class='container'>
-                <div class='row'>
-                    <label for='species-search' class='species-search-label'>Enter the common name of your bird here!</label>
-                    <input type='text' class='five columns' name='species-search' id='species-search'></input>
-                    <br>
-                    <input type='submit' class='button button-primary button-container'></input>
+            <div class='container button-container'>
+                <div class='row style-search'>
+                    <div class='ul-full-width'>
+                        <label for='species-search' class='species-search-label'>Enter the common name of your bird here!</label>
+                        <input type='text' name='species-search' id='species-search'></input>
+                        <br>
+                        <input type='submit' class='button button-primary button-container'></input>
+                    </div>
                 </div>
             </div>
         </form>
     </section>
-    <!-- <footer class='row'>
-    <p>Created by Ari Simon</p>
-</footer> -->
+    <section class='search-results-section u-full-width'>
+        <div class='container search-container'>
+        </div>
+    </section>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
