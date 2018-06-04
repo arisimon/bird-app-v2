@@ -142,12 +142,12 @@ function handleAddObservation() {
         addObservation({
             user: user,
             name: name,
-            scientificName: $(event.currentTarget).find('scientificNameModal').val(),
-            commonName: $(event.currentTarget).find('#commonNameModal').val(),
-            familyName: $(event.currentTarget).find('#familyNameModal').val(),
-            location: $(event.currentTarget).find('.locationModal').val(),
-            notes: $(event.currentTarget).find('#notesModal').val(),
-            photos: $(event.currentTarget).find('#imageModal').val(),
+            scientificName: $(this).find('#scientificNameModal').val(),
+            commonName: $(this).find('#commonNameModal').val(),
+            familyName: $(this).find('#familyNameModal').val(),
+            location: $(this).find('.locationModal').val(),
+            notes: $(this).find('#notesModal').val(),
+            photos: $(this).find('#imageModal').val(),
         });
         console.log('A new observation was added!');
     })
