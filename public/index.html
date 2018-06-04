@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/skeleton.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/theme-default.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -39,10 +40,10 @@
                     <form id='login-modal-form'>
                         <div class='u-full-width'>
                             <label for='username'>Username:</label>
-                            <input type="text" name="username" id='username' placeholder='Username' required='true'>
+                            <input type="text" name="username" id='username' placeholder='Username' data-validation='required' data-validation="alphanumeric" data-validation-allowing="-_">
                             <br>
                             <label for='password'>Password</label>
-                            <input type="password" name="password" id='password' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' required='true'>
+                            <input type="password" name="password" id='password' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' data-validation='required' data-validation-length='min8'>
                             <br>
                             <input id='login-modal-submit' class="button-primary" type="submit" value="Sign In">
                         </div>
@@ -62,13 +63,13 @@
                 <br>
                 <form id='register-modal-form'>
                     <label for='firstName'>First Name</label>
-                    <input type="text" name="firstName" id='firstName' placeholder='John' required='true'>
+                    <input type="text" name="firstName" id='firstName' placeholder='John' data-validation='required'>
                     <label for='lastName'>Last Name</label>
                     <input type="text" name="lastName" id='lastName' placeholder='Smith'>
                     <label for='username'>User name:</label>
-                    <input type="text" name="username" id='username-rg' placeholder='Username' required='true'>
+                    <input type="text" name="username" id='username-rg' placeholder='Username' data-validation='required'>
                     <label for='password'>Password</label><span id='errorNotLong'></span>
-                    <input type="password" name="password" id='password-rg' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' required='true'>
+                    <input type="password" name="password" id='password-rg' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' data-validation='required' data-validation-length='min8' data-validation-help='Min 8 characters'>
                     <br>
                     <br>
                     <input id='register-modal-submit' class="button-primary" type="submit" value="Create Account">
@@ -82,5 +83,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script src="./js/validation.js"></script>
     <script src="./js/app.js"></script>
+    <script src='./js/maps.js '></script>
 </body>

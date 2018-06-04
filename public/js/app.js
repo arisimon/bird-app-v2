@@ -10,8 +10,8 @@ function handleEventHandlers() {
     handleLogout();
     handleAddObservation();
     handleDeleteButton();
-    handleModalUpdateButton();
     handleUpdateButton();
+    handleModalUpdateButton();
 
     if(location.href.split('/').pop() === 'observations.html' && !$('.observations-items').text().length) {
         getObservations();
@@ -75,8 +75,10 @@ function handleRegForm() {
                 console.log('successfully registered');
                 $('#register-modal-form').html(`You've created an account!`);
                 setTimeout(function(data) {
-                    $('#register-modal-form').hide()
+                    $('#register-modal').hide()
+                    location.reload();
                 }, 1000)
+
             },
             error: function(err) {
                 console.log(err);
@@ -218,31 +220,31 @@ function populateUpdateForm(id, element) {
             console.log(observation);
 
             let updateModalForm = `
-                <form id='updateModalForm'>
+                <form id='updateModalForm' data-id='${observation._id}'>
             <div class='row'>
                 <div class='six columns'>
                     <h2>Bird</h2>
                     <label for='updateScientificName'>Scientific Name</label>
-                    <input class='u-full-width' type='text' name='scientificName' value=${observation.scientificName} id='updateScientificName'></input>
+                    <input class='u-full-width' type='text' name='scientificName' value='${observation.scientificName}' id='updateScientificName'></input>
                     <label for='updateCommonName' >Common Name</label>
-                    <input class='u-full-width' type='text' name='commonName' value=${observation.commonName} id='updateCommonName'></input>
+                    <input class='u-full-width' type='text' name='commonName' value='${observation.commonName}' id='updateCommonName'></input>
                     <label for='updateFamilyName'>Family Name</label>
-                    <input class='u-full-width' type='text' name='familyName' value=${observation.familyName} id='updateFamilyName'></input>
+                    <input class='u-full-width' type='text' name='familyName' value='${observation.familyName}' id='updateFamilyName'></input>
                 </div>
                 <div class='six columns'>
                     <h2>Location</h2>
                     <label for='updateLocation'>Address</label>
-                    <input class='u-full-width autocomplete updateLocation' id="ac2" name='address' value=${observation.location} type="text"></input>
+                    <input class='u-full-width autocomplete updateLocation' id="ac2" name='address' value='${observation.location}' type="text"></input>
                     <h2>Photos</h2>
                     <label for='updateImage'></label>
-                    <input type="text" name="photos" placeholder="Image URL" id="updateImage" value=${observation.photos}></input>
+                    <input type="text" name="photos" placeholder="Image URL" id="updateImage" class='u-img-responsive' value='${observation.photos}'></input>
                 </div>
             </div>
             <label for="updateNotes">Observation Notes</label>
-            <textarea class="u-full-width" name='notes' id='updateNotes' maxLength='180'>${observation.notes}</textarea>
+            <textarea class="u-full-width" name='notes' id='updateNotes'>${observation.notes}</textarea>
             <input id='updateSubmitModal' class="button-primary" type="submit" value="Update">
         </form>`
-            $("#updateModal").append(updateModalForm);
+            $("#renderModal").html(updateModalForm);
         }
     });
 }
@@ -258,24 +260,29 @@ function handleUpdateButton() {
 }
 //handle modal update button
 function handleModalUpdateButton() {
-    $('#updateSubmitModal').on('click', function(event) {
+    $('#updateModal').on('submit', '#updateModalForm', function(event) {
         event.preventDefault();
         console.log('Update button clicked');
-        let scientificName = $(this).find('#updateScientificName').val();
-        console.log(scientificName);
+        let id = $(this).closest('form').attr('data-id');
+        console.log(id);
+        let family = $(this).find('#updateFamilyName').val();
+        console.log(family);
+        let x = $(this).find('.updateLocation').val();
+        console.log(x);
 
-        // updateObservation({
-        //     user: user,
-        //     name: name,
-        //     scientificName: $(this).find('#updateScientificName').val(),
-        //     commonName: $(this).find('#updateCommonName').val(),
-        //     familyName: $(this).find('#updateFamily').val(),
-        //     location: $(this).find('#updateLocation').val(),
-        //     notes: $(this).find('#updateNotes').val(),
-        //     photos: $(this).find('#updateImage').val(),
-        // });
+        updateObservation(id, {
+            user: user,
+            name: name,
+            scientificName: $(this).find('#updateScientificName').val(),
+            commonName: $(this).find('#updateCommonName').val(),
+            familyName: $(this).find('#updateFamilyName').val(),
+            location: $(this).find('.updateLocation').val(),
+            notes: $(this).find('#updateNotes').val(),
+            photos: $(this).find('#updateImage').val(),
+        });
     });
 }
+
 
 //update observation
 function updateObservation(id, observation) {
@@ -293,6 +300,7 @@ function updateObservation(id, observation) {
         success: function(data) {
             console.log(data);
             getObservations(data);
+            location.reload();
         },
         error: function(err) {
             console.log(err);

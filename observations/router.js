@@ -101,15 +101,21 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 
     const toUpdate = {};
     const updateableFields = ['scientificName', 'commonName', 'familyName', 'location', 'notes', 'photos'];
+    let errorFound = false;
     updateableFields.forEach((field) => {
         if(field in req.body) {
             toUpdate[field] = req.body[field];
         } else {
             const message = `Missing ${field} in request body`;
             console.error(message);
+            let errorFound = true;
             return res.status(400).send(message);
         }
+
     })
+    if(errorFound) {
+        return
+    }
     Observations
         .findByIdAndUpdate(req.params.id, { $set: toUpdate }, { new: true })
         .then(updatedObservation => res.json(updatedObservation).status(204).end())

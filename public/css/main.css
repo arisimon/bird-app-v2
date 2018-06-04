@@ -45,9 +45,7 @@
     width: 100%;
     line-height: 1;
     display: block;
-    /* Remove bullet points; allow greater control of positioning */
     padding: 0;
-    /* Override defaults for lists */
 }
 
 .observation-items li {
@@ -57,12 +55,11 @@
     margin: 0!important;
     width: 33%;
     border: 10px solid white;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .15);
 
     position: relative;
     display: inline-block;
-    /* Get all images to show in a row */
     text-align: center;
-    /* Centre align the images */
 }
 
 .observation-items li:nth-child(4n) {
@@ -90,6 +87,7 @@
     opacity: 0;
     background: rgba(0, 0, 0, .75);
     color: white;
+    overflow: scroll;
 
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
@@ -115,6 +113,17 @@
     box-shadow: inset 0 0 0 10px #222;
 }
 
+.search-section {
+    margin-top: 25px;
+}
+
+.species-search-header {
+    text-align: center;
+}
+
+.species-search-label {
+    text-align: center;
+}
 
 footer {
     text-align: center;

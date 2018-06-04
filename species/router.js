@@ -22,55 +22,55 @@ passport.use('local', localStrategy);
 passport.use(jwtStrategy);
 
 
-//GET request for all species
-router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log('GETting all species')
-    Species
-        .find()
-        .exec()
-        .then(species => {
-            res.status(200).json(species)
-        })
-        .catch(err => {
-            res.status(500).json({ message: 'Internal server error' });
-        })
-})
+// //GET request for all species
+// router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+//     console.log('GETting all species')
+//     Species
+//         .find()
+//         .exec()
+//         .then(species => {
+//             res.status(200).json(species)
+//         })
+//         .catch(err => {
+//             res.status(500).json({ message: 'Internal server error' });
+//         })
+// })
 
 
-// //function to format query strings
-// function escapeRegex(text) {
-//     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-// };
-// //GET species based off search input, if not found get all species
-// router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
-//     console.log('Received a GET request to find species');
-//     console.log(req.query);
-//     let noMatch = null;
-//     if (req.query.search) {
-//         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-//         Species.find({ common_name: regex }, function(err, allSpecies) {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 if (allSpecies.length < 1) {
-//                     noMatch = "No species match that query, please try again.";
-//                 }
-//                 res.status(200).json(species)
-//             }
-//         });
-//     } else {
-//         // Get all species from DB
-//         Species
-//             .find()
-//             .exec()
-//             .then(species => {
-//                 res.status(200).json(species)
-//             })
-//             .catch(err => {
-//                 res.status(500).json({ message: 'Internal server error' });
-//             })
-//     }
-// });
+//function to format query strings
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+//GET species based off search input, if not found get all species
+router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
+    console.log('Received a GET request to find species');
+    let noMatch = null;
+    if(req.query.search) {
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        Species.find({ common_name: regex }, function(err, allSpecies) {
+            if(err) {
+                console.log(err);
+
+            } else {
+                if(allSpecies.length < 1) {
+                    noMatch = "No species match that query, please try again.";
+                }
+                res.status(200).json(species)
+            }
+        });
+    } else {
+        // Get all species from DB
+        Species
+            .find()
+            .exec()
+            .then(species => {
+                res.status(200).json(species)
+            })
+            .catch(err => {
+                res.status(500).json({ message: 'Internal server error' });
+            })
+    }
+});
 
 
 //GET request by ID

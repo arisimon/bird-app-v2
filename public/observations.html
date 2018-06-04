@@ -19,10 +19,15 @@
         <div class="row">
             <div class="twelve columns">
                 <h3 class="separator">Observations Tracker</h3>
-                <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</h4>
+                <div class='button-container'>
+                    <button class='logout' type='button button-primary'>Log Out</button>
+                </div>
+                <div class='container'>
+                    <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</h4>
+                </div>
                 <div class='button-container'>
                     <a href="#newObservation" class="button button-primary" rel="modal:open" type='submit'>Add New Observation</a>
-                    <button class='logout' type='button button-primary'>Log Out</button>
+                    <a href='/species.html' class='button button-primary' type='button'>Species Search</a>
                 </div>
             </div>
         </div>
@@ -30,38 +35,41 @@
     <section class='observation-section container'>
         <div class="row observations-gallery">
             <ul class="observation-items u-cf">
+        </div>
     </section>
-    <!-- update modal -->
-    <div id="updateModal" class="modal">
-    </div>
-    </div>
-    <!-- new observation modal -->
-    <div id="newObservation" class="modal">
-        <form id='newObservationForm'>
-            <div class='row'>
-                <div class='six columns'>
-                    <h2>Bird</h2>
-                    <label for='scientificNameModal'>Scientific Name</label>
-                    <input class='u-full-width' type='text' name='scientificName' id='scientificNameModal'>
-                    <label for='commonNameModal'>Common Name</label>
-                    <input class='u-full-width' type='text' name='commonName' id='commonNameModal'>
-                    <label for='familyNameModal'>Family Name</label>
-                    <input class='u-full-width' type='text' name='familyName' id='familyNameModal'>
-                </div>
-                <div class='six columns'>
-                    <h2>Location</h2>
-                    <label for='autocomplete'>Address</label>
-                    <input class='u-full-width autocomplete locationModal' id="ac1" name='location' type="text"></input>
-                    <h2>Photos</h2>
-                    <label for='imageModal'></label>
-                    <input type="text" name="photos" placeholder="Image URL" id="imageModal"></input>
-                </div>
+    <section id='observation-modal-section'>
+        <!-- update modal -->
+        <div id="updateModal" class="modal">
+            <div id='renderModal'>
             </div>
-            <label for="notesModal">Observation Notes</label>
-            <textarea class="u-full-width" name='notes' id="notesModal" maxLength='180'></textarea>
-            <input id=' observationSubmitModal ' class="button-primary" type="submit" value="Create">
-        </form>
-    </div>
+        </div>
+        <!-- new observation modal -->
+        <div id="newObservation" class="modal">
+            <form id='newObservationForm'>
+                <div class='row'>
+                    <div class='six columns'>
+                        <h2>Bird</h2>
+                        <label for='scientificNameModal'>Scientific Name</label>
+                        <input class='u-full-width' type='text' name='scientificName' id='scientificNameModal'>
+                        <label for='commonNameModal'>Common Name</label>
+                        <input class='u-full-width' type='text' name='commonName' id='commonNameModal'>
+                        <label for='familyNameModal'>Family Name</label>
+                        <input class='u-full-width' type='text' name='familyName' id='familyNameModal'>
+                    </div>
+                    <div class='six columns'>
+                        <h2>Location</h2>
+                        <label for='autocomplete'>Address</label>
+                        <input class='u-full-width autocomplete locationModal' id="ac1" name='location' type="text"></input>
+                        <h2>Photos</h2>
+                        <label for='imageModal'></label>
+                        <input type="text" name="photos" placeholder="Image URL" id="imageModal"></input>
+                    </div>
+                </div>
+                <label for="notesModal">Observation Notes</label>
+                <textarea class="u-full-width" name='notes' id="notesModal"></textarea>
+                <input id=' observationSubmitModal ' class="button-primary" type="submit" value="Create">
+            </form>
+        </div>
     </section>
     <!--     <div>
         <footer class='row '>
@@ -73,6 +81,7 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3lBrBZp1PAbL86KyQVgzf2RyPSqIkx4M&libraries=places"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
     <script src="./js/app.js"></script>
     <script src='./js/maps.js '></script>
 </body>

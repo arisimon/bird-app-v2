@@ -21,8 +21,6 @@
 
 
 
-
-
 /* For devices larger than 400px */
 
 @media (min-width: 400px) {
@@ -31,8 +29,6 @@
         padding: 0;
     }
 }
-
-
 
 
 
@@ -172,28 +168,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Base Styles
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -214,12 +188,6 @@ body {
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #222;
 }
-
-
-
-
-
-
 
 
 
@@ -282,10 +250,6 @@ h6 {
 
 
 
-
-
-
-
 /* Larger than tablet */
 
 @media (min-width: 550px) {
@@ -318,11 +282,6 @@ p {
 
 
 
-
-
-
-
-
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -333,9 +292,6 @@ a {
 a:hover {
     color: #0FA0CE;
 }
-
-
-
 
 
 
@@ -416,6 +372,16 @@ input[type="button"].button-primary:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -437,6 +403,16 @@ select {
     box-shadow: none;
     box-sizing: border-box;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -512,6 +488,16 @@ label>.label-body {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* Lists
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -548,7 +534,6 @@ li {
 
 
 
-
 /* Code
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -567,6 +552,7 @@ pre>code {
     padding: 1rem 1.5rem;
     white-space: pre;
 }
+
 
 
 
@@ -602,7 +588,6 @@ td:last-child {
 
 
 
-
 /* Spacing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -629,8 +614,6 @@ ol,
 form {
     margin-bottom: 2.5rem;
 }
-
-
 
 
 
@@ -675,7 +658,6 @@ form {
 
 
 
-
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -689,7 +671,7 @@ hr {
 .separator {
     position: relative;
     padding-bottom: 1em;
-    padding-top: 0.5em;
+    padding-top: 1em;
     text-align: center;
     font-weight: bold;
     color: inherit;
@@ -741,6 +723,16 @@ hr {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* Clearing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -754,6 +746,7 @@ hr {
     display: table;
     clear: both;
 }
+
 
 
 
@@ -800,6 +793,11 @@ there.
     }
 }
 
+@media only screen and (max-width: 768px) {
+    .six.columns {
+        width: 100%;
+    }
+}
 
 
 
@@ -817,12 +815,9 @@ there.
 
 
 
-
 /* Larger than phablet (also point when grid becomes active) */
 
 @media only screen and(min-width: 550px) {}
-
-
 
 
 
@@ -842,17 +837,9 @@ there.
 
 
 
-
-
-
-
 /* Larger than desktop */
 
 @media only screen and(min-width: 1000px) {}
-
-
-
-
 
 
 

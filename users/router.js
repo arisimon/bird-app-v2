@@ -12,7 +12,7 @@ router.post('/', jsonParser, (req, res) => {
     const requiredFields = ['username', 'password'];
     const missingField = requiredFields.find(field => !(field in req.body));
 
-    if (missingField) {
+    if(missingField) {
         return res.status(422).json({
             code: 422,
             reason: 'ValidationError',
@@ -26,7 +26,7 @@ router.post('/', jsonParser, (req, res) => {
         field => field in req.body && typeof req.body[field] !== 'string'
     );
 
-    if (nonStringField) {
+    if(nonStringField) {
         return res.status(422).json({
             code: 422,
             reason: 'ValidationError',
@@ -41,7 +41,7 @@ router.post('/', jsonParser, (req, res) => {
         field => req.body[field].trim() !== req.body[field]
     );
 
-    if (nonTrimmedField) {
+    if(nonTrimmedField) {
         return res.status(422).json({
             code: 422,
             reason: 'ValidationError',
@@ -71,7 +71,7 @@ router.post('/', jsonParser, (req, res) => {
         req.body[field].trim().length > sizedFields[field].max
     );
 
-    if (tooSmallField || tooLargeField) {
+    if(tooSmallField || tooLargeField) {
         return res.status(422).json({
             code: 422,
             reason: 'ValidationError',
@@ -91,7 +91,7 @@ router.post('/', jsonParser, (req, res) => {
     return User.find({ username })
         .count()
         .then(count => {
-            if (count > 0) {
+            if(count > 0) {
                 //If existing username
                 return Promise.reject({
                     code: 422,
@@ -116,7 +116,7 @@ router.post('/', jsonParser, (req, res) => {
             return res.status(201).json(user);
         })
         .catch(err => {
-            if (err.reason === 'ValidationError') {
+            if(err.reason === 'ValidationError') {
                 return res.status(err.code).json(err);
             }
             res.status(500).json({ code: 500, message: err.message });

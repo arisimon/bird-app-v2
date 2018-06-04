@@ -99,29 +99,4 @@
 //         })
 //     })
 
-//     describe('Test all observation endpoints', function() {
-//         beforeEach(function() {
-//             return generateObservation();
-//         });
-//         afterEach(function() {
-//             return tearDownDb();
-//         });
-
-//         it('GET should return all observations', function(done) {
-//             let res;
-//             chai.request(app)
-//                 .get('/observations')
-//                 .set('Authorization', `Bearer ${authToken}`)
-//                 .then(function(_res) {
-//                     res = _res;
-//                     res.should.have.status(200);
-//                     res.body.should.have.length.of.at.least(1);
-//                     return Observations.count();
-//                 })
-//                 .then(function(count) {
-//                     res.body.should.have.length.of(count);
-//                 });
-//             done();
-//         });
-//     })
 // })
