@@ -51,6 +51,7 @@ function handleLoginForm() {
             },
             error: function(err) {
                 console.log(err);
+                alert(err);
             }
         }
         $.ajax(settings);
@@ -83,7 +84,6 @@ function handleRegForm() {
 
             },
             error: function(err) {
-                console.log(err);
                 if(password.length < 8) {
                     $("#errorNotLong").html(`<p>Password must be at least 8 characters</p>`)
                 }
