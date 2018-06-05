@@ -19,12 +19,13 @@ chai.use(chaiHttp);
 //Seed database
 function generateObservations() {
     return {
-        scientificName: faker.name,
-        commonName: faker.name,
-        familyName: faker.name,
-        location: faker.address.streetAddress,
+        user: faker.name.firstName(),
+        scientificName: faker.name.firstName(),
+        commonName: faker.name.lastName(),
+        familyName: faker.name.firstName(),
+        location: faker.address.streetAddress(),
         notes: faker.lorem.paragraph(),
-        photos: faker.image.imageUrl
+        photos: faker.image.imageUrl(),
     };
 }
 
@@ -37,15 +38,15 @@ function seedData() {
     return Observations.insertMany(seedData);
 }
 
-// function tearDownDb() {
-//     return new Promise((resolve, reject) => {
-//         console.warn("Deleting test database");
-//         mongoose.connection
-//             .dropDatabase()
-//             .then(result => resolve(result))
-//             .catch(err => reject(err));
-//     });
-// }
+function tearDownDb() {
+    return new Promise((resolve, reject) => {
+        console.warn("Deleting test database");
+        mongoose.connection
+            .dropDatabase()
+            .then(result => resolve(result))
+            .catch(err => reject(err));
+    });
+}
 
 
 describe('Observations API testing', function() {
@@ -180,7 +181,7 @@ describe('Observations API testing', function() {
             }
         );
 
-        it('should return all observations', function() {
+        it('should get all observations', function() {
             let res;
             return chai.request(app)
                 .get('/observations')
@@ -188,11 +189,12 @@ describe('Observations API testing', function() {
                 .then(function(_res) {
                     res = _res;
                     expect(res).to.have.status(200);
-                    expect(res.body.data).to.have.length.of.at.least(1);
+                    console.log(res.body, 'hello!');
+                    expect(res.body).to.have.length.of.at.least(1);
                     return Observations.count();
                 })
                 .then(function(count) {
-                    expect(res.body.data).to.have.lengthOf(count);
+                    expect(res.body).to.have.lengthOf(count);
                 });
         });
 
@@ -233,9 +235,9 @@ describe('Observations API testing', function() {
                     return Observations.findById(res.body.id);
                 })
                 .then(function(observation) {
-                    expect(res.body.commonName).to.equal(newObservations.commonName);
-                    expect(res.body.location).to.equal(newObservations.location);
-                    expect(res.body.notes).to.equal(newObservations.notes);
+                    expect(observation.commonName).to.equal(newObservations.commonName);
+                    expect(observation.location).to.equal(newObservations.location);
+                    expect(observation.notes).to.equal(newObservations.notes);
                 });
         });
     });
@@ -258,7 +260,7 @@ describe('Observations API testing', function() {
             const updateObservations = {
                 scientificName: "Updated scientificName",
                 commonName: "Updated commonName",
-                family: "Updated family",
+                familyName: "Updated family",
                 location: "Updated location",
                 notes: "Updated notes",
                 photos: "updated photos"
@@ -268,6 +270,7 @@ describe('Observations API testing', function() {
                 .findOne()
                 .then(function(observation) {
                     updateObservations.id = observation.id;
+
 
                     return chai.request(app)
                         .put(`/observations/${observation.id}`)
@@ -327,6 +330,5 @@ describe('Observations API testing', function() {
         });
 
     });
-
 
 });
