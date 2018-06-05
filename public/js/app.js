@@ -330,8 +330,9 @@ function speciesSearch(input) {
             Authorization: `Bearer ${authToken}`
         },
         contentType: 'application/json',
-        data: JSON.stringify(input),
+        data: input,
         success: function(data) {
+            console.log(data);
             displaySpecies(data);
         },
         error: function(err) {
@@ -341,6 +342,7 @@ function speciesSearch(input) {
 }
 
 function displaySpecies(species) {
+    console.log(species);
     $.each(species, function(index, value) {
         $('.search-results').append(` 
             <div class='row'>

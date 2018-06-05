@@ -19,6 +19,7 @@ speciesSchema.methods.serialize = function() {
     };
 }
 
+speciesSchema.index({ common_name: 1 });
 const Species = mongoose.model('Species', speciesSchema, 'species');
 
 module.exports = { Species };

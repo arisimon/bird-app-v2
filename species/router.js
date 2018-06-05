@@ -40,11 +40,12 @@ passport.use(jwtStrategy);
 //GET species based off search input, if not found get all species
 router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
     console.log('Received a GET request to find species');
-    console.log(req.query.search);
+
+    //query database with user input. find fuzzy matches
 
     let noMatch = null;
-    if(req.query.search) {
-        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    if(req.query) {
+        const regex = new RegExp(escapeRegex(req.query), 'gi');
         Species.find({ common_name: regex }, function(err, allSpecies) {
             if(err) {
                 console.log(err);
@@ -53,7 +54,8 @@ router.get('/', passport.authenticate('jwt', { session: false }), function(req, 
                 if(allSpecies.length < 1) {
                     noMatch = "No species match that query, please try again.";
                 }
-                res.status(200).json(species)
+                res.status(200).json(allSpecies);
+                console.log(allSpecies);
             }
         });
     } else {
@@ -86,9 +88,7 @@ router.get('/:id', jsonParser, passport.authenticate('jwt', { session: false }),
 
 
 function escapeRegex(text) {
-    console.log(text);
     let object = (Object.keys(text));
-    console.log(object);
     let format = object.toString();
     console.log(format);
     format.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
