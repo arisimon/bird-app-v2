@@ -47,8 +47,15 @@ Within this application, users can:
 * TravisCI
 * mLab
 
-## Responsive Design
-This app is built to be responsive across mobile, tablet, laptop, and desktop screens.
+## Screenshots
+![Home Page](https://github.com/arisimon/bird-app-v2/blob/master/public/images/home-page.png)
+![Login Modal](https://github.com/arisimon/bird-app-v2/blob/master/public/images/login.png)
+![New User Registration Modal]()
+![Observations Page](https://github.com/arisimon/bird-app-v2/blob/master/public/images/observation.png)
+![Observation Detail](https://github.com/arisimon/bird-app-v2/blob/master/public/images/new-observation.png)
+![New Observation Modal](https://github.com/arisimon/bird-app-v2/blob/master/public/images/new-observation.png)
+![Species Search](https://github.com/arisimon/bird-app-v2/blob/master/public/images/species.png)
+
 
 ## Development
 ### Future updates are expected to include:
