@@ -48,11 +48,22 @@ Within this application, users can:
 * mLab
 
 ## Screenshots
+#### Home Page
 ![Home Page](https://github.com/arisimon/bird-app-v2/blob/master/public/images/home-page.png)
+#### Login and Registration
 ![Login Modal](https://github.com/arisimon/bird-app-v2/blob/master/public/images/login.png)
 ![New User Registration Modal](https://github.com/arisimon/bird-app-v2/blob/master/public/images/register.png)
+
+#### Observations Page
 ![Observations Page](https://github.com/arisimon/bird-app-v2/blob/master/public/images/observation.png)
+
+#### Observation Details
+![Observation Details](https://github.com/arisimon/bird-app-v2/blob/master/public/images/observation-detail.png)
+
+#### New Observation
 ![New Observation Modal](https://github.com/arisimon/bird-app-v2/blob/master/public/images/new-observation.png)
+
+#### Species Search Page
 ![Species Search](https://github.com/arisimon/bird-app-v2/blob/master/public/images/species.png)
 
 
