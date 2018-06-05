@@ -53,8 +53,8 @@ describe('Observations API testing', function() {
 
     const username = 'user';
     const password = 'password';
-    const firstName = '';
-    const lastName = '';
+    let firstName = '';
+    let lastName = ''
 
     before(function() {
         return runServer(TEST_DATABASE_URL);
@@ -85,88 +85,89 @@ describe('Observations API testing', function() {
         return closeServer();
     });
 
-    // describe('Auth tests', function() {
-    //     it('Should send protected data', function() {
+    describe('Auth tests', function() {
+        it('Should send protected data', function() {
 
-    //         const token = jwt.sign({
-    //                 user: {
-    //                     username,
-    //                 }
-    //             },
-    //             JWT_SECRET, {
-    //                 algorithm: 'HS256',
-    //                 subject: username,
-    //                 expiresIn: '7d'
-    //             }
-    //         );
+            const token = jwt.sign({
+                    user: {
+                        username,
+                    }
+                },
+                JWT_SECRET, {
+                    algorithm: 'HS256',
+                    subject: username,
+                    expiresIn: '7d'
+                }
+            );
 
-    //         return chai
-    //             .request(app)
-    //             .get('/observations')
-    //             .set('authorization', `Bearer ${token}`)
-    //             .then(res => {
-    //                 expect(res).to.have.status(200);
-    //                 expect(res.body).to.be.an('array');
-    //             });
-    //     });
+            return chai
+                .request(app)
+                .get('/observations')
+                .set('authorization', `Bearer ${token}`)
+                .then(res => {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.an('array');
+                });
+        });
 
-    //     it('Should return a valid auth token', function() {
-    //         return chai
-    //             .request(app)
-    //             .post('/api/auth/login')
-    //             .send({ username, password })
-    //             .then(res => {
-    //                 expect(res).to.have.status(200);
-    //                 expect(res.body).to.be.an('object');
-    //                 const token = res.body.authToken;
-    //                 expect(token).to.be.a('string');
-    //                 const payload = jwt.verify(token, JWT_SECRET, {
-    //                     algorithm: ['HS256']
-    //                 });
-    //                 expect(payload.user).to.deep.equal({
-    //                     username,
-    //                     firstName,
-    //                     lastName
-    //                 });
-    //             });
-    //     });
+        // it('Should return a valid auth token', function() {
+        //     return chai
+        //         .request(app)
+        //         .post('/api/auth/login')
+        //         .send({ username, password })
+        //         .then(res => {
+        //             expect(res).to.have.status(200);
+        //             expect(res.body).to.be.an('object');
+        //             const token = res.body.authToken;
+        //             expect(token).to.be.a('string');
+        //             const payload = jwt.verify(token, JWT_SECRET, {
+        //                 algorithm: ['HS256']
+        //             });
+        //             expect(payload.user).to.deep.equal({
+        //                 username,
+        //                 firstName,
+        //                 lastName,
+        //                 password,
+        //             });
+        //         });
+        // });
 
-    //     it('Should reject requests with incorrect usernames', function() {
-    //         return chai
-    //             .request(app)
-    //             .post('/api/auth/login')
-    //             .send({ username: 'wrongUsername', password })
-    //             .then(() =>
-    //                 expect.fail(null, null, 'Request should not succeed')
-    //             )
-    //             .catch(err => {
-    //                 if(err instanceof chai.AssertionError) {
-    //                     throw err;
-    //                 }
+        // it('Should reject requests with incorrect usernames', function() {
+        //     return chai
+        //         .request(app)
+        //         .post('/api/auth/login')
+        //         .send({ username: 'wrongUsername', password })
+        //         .then(() =>
+        //             expect.fail(null, null, 'Request should not succeed')
+        //         )
+        //         .catch(err => {
+        //             if(err instanceof chai.AssertionError) {
+        //                 throw err;
+        //             }
 
-    //                 const res = err.response;
-    //                 expect(res).to.have.status(401);
-    //             });
-    //     });
+        //             const res = err.response;
+        //             expect(res).to.have.status(401);
+        //         });
+        // });
 
-    //     it('Should reject requests with incorrect passwords', function() {
-    //         return chai
-    //             .request(app)
-    //             .post('/api/auth/login')
-    //             .send({ username, password: 'wrongPassword' })
-    //             .then(() =>
-    //                 expect.fail(null, null, 'Request should not succeed')
-    //             )
-    //             .catch(err => {
-    //                 if(err instanceof chai.AssertionError) {
-    //                     throw err;
-    //                 }
+        // it('Should reject requests with incorrect passwords', function() {
+        //     return chai
+        //         .request(app)
+        //         .post('/api/auth/login')
+        //         .send({ username, password: 'wrongPassword' })
+        //         .then(() =>
+        //             expect.fail(null, null, 'Request should not succeed')
+        //         )
+        //         .catch(err => {
+        //             if(err instanceof chai.AssertionError) {
+        //                 throw err;
+        //             }
 
-    //                 const res = err.response;
-    //                 expect(res).to.have.status(401);
-    //             });
-    //     });
-    // });
+        //             const res = err.response;
+        //             expect(res).to.have.status(401);
+        //         });
+        // });
+    });
 
     describe('GET endpoint', function() {
         const token = jwt.sign({
