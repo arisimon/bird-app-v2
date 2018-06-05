@@ -77,9 +77,9 @@ app.get('/api/protected', passport.authenticate('jwt', { session: false }), (req
 let server;
 
 //run server
-function runServer(databaseUrl = DATABASE_URL, port = PORT) {
+function runServer(databaseUrl, port = PORT) {
     return new Promise((resolve, reject) => {
-        mongoose.connect(DATABASE_URL, err => {
+        mongoose.connect(databaseUrl, err => {
             if(err) {
                 return reject(err);
             }
