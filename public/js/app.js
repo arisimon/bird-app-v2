@@ -345,6 +345,7 @@ function speciesSearch(input) {
 
 function displaySpecies(species) {
     console.log(species);
+    $('.search-container').empty();
     $.each(species, function(index, value) {
         $('.search-container').append(` 
             <div class='row style-results'>
