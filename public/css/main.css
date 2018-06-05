@@ -23,6 +23,10 @@
     text-align: center;
 }
 
+.image-container {
+    text-align: center;
+}
+
 .login-container {
     background: #EABA6B;
     box-shadow: 2px 4px 5px grey;

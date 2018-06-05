@@ -142,7 +142,7 @@ function displayObservations(observations) {
 
 //handle observation button event
 function handleAddObservation() {
-    $('#newObservation').on('submit', event => {
+    $('#newObservation').on('submit', function(event) {
         event.preventDefault();
         addObservation({
             user: user,
@@ -374,6 +374,7 @@ function showToTop() {
 function backToTop() {
     $('#toTop').click(function() {
         $('html, body').animate({ scrollTop: 0 }, 800);
+        $('#species-search').val('');
         return false;
     });
 }
