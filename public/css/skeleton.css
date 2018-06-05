@@ -307,6 +307,7 @@ are based on 10px sizing. So basically 1.5rem = 15px :) */
         color: #1F2B38;
         background-color: #33C3F0;
         border-color: #33C3F0;
+        box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6);
     }
 
     .button.button-primary:hover,

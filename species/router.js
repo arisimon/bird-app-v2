@@ -53,6 +53,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), function(req, 
             } else {
                 if(allSpecies.length < 1) {
                     noMatch = "No species match that query, please try again.";
+
                 }
                 res.status(200).json(allSpecies);
                 console.log(allSpecies);

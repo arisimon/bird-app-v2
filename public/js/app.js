@@ -346,13 +346,18 @@ function speciesSearch(input) {
 function displaySpecies(species) {
     console.log(species);
     $('.search-container').empty();
+    if(species.length === 0) {
+        alert('No results found. Try another search!');
+        $('#species-search').val('');
+    }
+
     $.each(species, function(index, value) {
         $('.search-container').append(` 
             <div class='row style-results'>
                 <div class='ul-full-width species-div'>
-                    <h4><strong>Common Name:</strong> <em>${species[index].scientific_name}</em></h4>
-                    <h4><strong>Scientific Name:</strong> <em>${species[index].common_name}</em></h4>
-                    <h4><strong>Family:</strong> <em>${species[index].family}</em></h4>
+                    <span><h4><strong>Common Name:</strong></h4><h5> <em>${species[index].scientific_name}</em></h5></span>
+                    <h4><strong>Scientific Name:</strong></h4><h5> <em>${species[index].common_name}</em></h5>
+                    <h4><strong>Family:</strong></h4><h5> <em>${species[index].family}</em></h5>
                 </div>
             </div>
             `)
