@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <section id="introduction" class="introduction u-full-width container">
+    <section id="introduction" class="introduction u-full-width container" role='banner'>
         <div class="row">
             <div class="twelve columns">
                 <h3 class="separator">Bird Search</h3>
@@ -28,27 +28,31 @@
                     <h4 class='species-search-header'>Want to learn more about your bird species? <br>Find their scientific name and family name here!</h4>
                 </div>
             </div>
+        </div>
     </section>
-    <section class='search-section u-full-width'>
-        <form id='species-search-form'>
+    <section class='search-section u-full-width' role='main'>
+        <form id='species-search-form' role='form'>
             <div class='container button-container'>
-                <div class='row style-search'>
+                <div class='row'>
                     <div class='ul-full-width'>
                         <label for='species-search' class='species-search-label'>Enter the common name of your bird here!</label>
-                        <input type='text' name='species-search' id='species-search'></input>
+                        <input type='text' role='search' name='species-search' id='species-search' data-validation='required' data-validation-regexp='/^[a-zA-Z\s]+$/'></input>
                         <br>
-                        <input type='submit' class='button button-primary button-container'></input>
+                        <input type='submit' class='button button-primary button-container' value='Search'></input>
                     </div>
                 </div>
             </div>
         </form>
     </section>
-    <section class='search-results-section u-full-width'>
-        <div class='container search-container'>
+    <section class='search-results-section u-full-width '>
+        <div class='container search-container '>
         </div>
     </section>
+    <a href="#" id="toTop">Scroll To Top</a>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
     <script src="./js/app.js"></script>
+    <script src="./js/validation.js"></script>
 </body>

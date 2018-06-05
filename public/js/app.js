@@ -13,6 +13,7 @@ function handleEventHandlers() {
     handleUpdateButton();
     handleModalUpdateButton();
     handleSpeciesSearchButton();
+    showToTop();
 
     if(location.href.split('/').pop() === 'observations.html' && !$('.observations-items').text().length) {
         getObservations();
@@ -120,7 +121,7 @@ function displayObservations(observations) {
     $.each(observations, function(index, value) {
         $('.observation-items').append(` 
                 <li class="six columns observation-li" data-id= "${value._id}">
-                    <img class='u-img-responsive' src="${observations[index].photos}">
+                    <img class='u-img-responsive' src="${observations[index].photos}" alt='${observations[index].commonName}.jpg'>
             <div class="observation-detail">
                 <div class="vertical-centered">
                     <p class="separator orange common-name-text">${observations[index].commonName}</p>
@@ -332,8 +333,9 @@ function speciesSearch(input) {
         contentType: 'application/json',
         data: input,
         success: function(data) {
-            console.log(data);
+            console.log('species search request successful');
             displaySpecies(data);
+
         },
         error: function(err) {
             console.log(err);
@@ -344,15 +346,35 @@ function speciesSearch(input) {
 function displaySpecies(species) {
     console.log(species);
     $.each(species, function(index, value) {
-        $('.search-results').append(` 
-            <div class='row'>
+        $('.search-container').append(` 
+            <div class='row style-results'>
                 <div class='ul-full-width species-div'>
-                    <h4><strong>Common Name:</strong> ${species[index].scientific_name}</h4>
-                    <p><strong>Scientific Name:</strong> ${species[index].common_name}</p>
-                    <p><strong>Family:</strong> ${species[index].family_name}</p>
+                    <h4><strong>Common Name:</strong> <em>${species[index].scientific_name}</em></h4>
+                    <h4><strong>Scientific Name:</strong> <em>${species[index].common_name}</em></h4>
+                    <h4><strong>Family:</strong> <em>${species[index].family}</em></h4>
                 </div>
             </div>
             `)
+        backToTop();
+    });
+}
+
+//control back to top button
+function showToTop() {
+    $(window).scroll(function() {
+        if($(this).scrollTop() > 100) {
+            $('#toTop').fadeIn();
+        } else {
+            $('#toTop').fadeOut();
+        }
+    });
+}
+
+//handle click event on to top button
+function backToTop() {
+    $('#toTop').click(function() {
+        $('html, body').animate({ scrollTop: 0 }, 800);
+        return false;
     });
 }
 

@@ -17,67 +17,80 @@
 
 <body>
     <!-- Home page -->
-    <div class='content'>
-        <div class='container'>
-            <header class='row'>
-                <div class='ul-full-width'>
-                    <h1>Bird Observation Journal</h1>
-                    <a href='index.html' class='logout' style='display:none'>Logout</a>
-                </div>
-            </header>
-            <section>
-                <div class='login-section'>
-                    <h2>Are you an avid birder?</h2>
-                    <p>Keep track of your bird sightings with this awesome journal!</p>
-                    <a href="#login-modal" class="button" rel="modal:open">Log In</a>
-                    <br>
-                    <a href="#register-modal" class="button" rel="modal:open">Create Account</a>
-                </div>
-            </section>
-        </div>
-        <section id='modal-section'>
-            <!-- login modal -->
-            <div id="login-modal" class="modal container u-max-full-width">
-                <div class='row'>
-                    <form id='login-modal-form'>
-                        <div class='u-full-width'>
-                            <label for='username'>Username:</label>
-                            <input type="text" name="username" id='username' placeholder='Username' data-validation='required' data-validation="alphanumeric" data-validation-allowing="-_">
-                            <br>
-                            <label for='password'>Password</label>
-                            <input type="password" name="password" id='password' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' data-validation='required' data-validation-length='min8'>
-                            <br>
-                            <input id='login-modal-submit' class="button-primary" type="submit" value="Sign In">
-                        </div>
-                        <div class='u-full-width'>
-                            <div class='demo-info'>
-                                <br>
-                                <p><em><strong>Demo username: demo</strong></em></p>
-                                <p><em><strong>Demo password: password</strong></em></p>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- registration modal -->
-            <div id="register-modal" class="modal container u-max-full-width">
-                <br>
-                <br>
-                <form id='register-modal-form'>
-                    <label for='firstName'>First Name</label>
-                    <input type="text" name="firstName" id='firstName' placeholder='John' data-validation='required'>
-                    <label for='lastName'>Last Name</label>
-                    <input type="text" name="lastName" id='lastName' placeholder='Smith'>
-                    <label for='username'>User name:</label>
-                    <input type="text" name="username" id='username-rg' placeholder='Username' data-validation='required'>
-                    <label for='password'>Password</label><span id='errorNotLong'></span>
-                    <input type="password" name="password" id='password-rg' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' data-validation='required' data-validation-length='min8' data-validation-help='Min 8 characters'>
-                    <br>
-                    <br>
-                    <input id='register-modal-submit' class="button-primary" type="submit" value="Create Account">
-                </form>
+    <div class='content' role='main' role='main'>
+        <section class='header-section'>
+            <div class='container'>
+                <header class='row'>
+                    <div class='ul-full-width'>
+                        <h1>Bird Observation Journal</h1>
+                        <a href='index.html' class='logout' style='display:none'>Logout</a>
+                    </div>
+                </header>
             </div>
         </section>
+        <section>
+            <div class='login-section'>
+                <div class='container login-container'>
+                    <div class='row u-full-width'>
+                        <h2>Are you an avid birder?</h2>
+                    </div>
+                    <div class='row u-full-width'>
+                        <p>Keep track of your bird sightings with this awesome journal!
+                            <br> Want to learn more about your birds? Use the species search to find out more about them!</p>
+                    </div>
+                    <div class='row u-full-width'>
+                        <a href="#login-modal" class="button button-primary" rel="modal:open">Log In</a>
+                        <br>
+                        <a href="#register-modal" class="button button-primary" rel="modal:open">Create Account</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+    </div>
+    <section id='modal-section'>
+        <!-- login modal -->
+        <div id="login-modal" class="modal container u-max-full-width">
+            <div class='row'>
+                <form id='login-modal-form' role='form' aria-label='login-form'>
+                    <div class='u-full-width'>
+                        <label for='username'>Username:</label>
+                        <input type="text" name="username" id='username' placeholder='Username' data-validation='required' data-validation="alphanumeric" data-validation-allowing="-_">
+                        <br>
+                        <label for='password'>Password</label>
+                        <input type="password" name="password" id='password' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' data-validation='required' data-validation-length='min8'>
+                        <br>
+                        <input id='login-modal-submit' class="button-primary" type="submit" value="Sign In">
+                    </div>
+                    <div class='u-full-width'>
+                        <div class='demo-info'>
+                            <br>
+                            <p><em><strong>Demo username: demo</strong></em></p>
+                            <p><em><strong>Demo password: password</strong></em></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- registration modal -->
+        <div id="register-modal" class="modal container u-max-full-width">
+            <br>
+            <br>
+            <form id='register-modal-form' role='form' aria-label='register-form'>
+                <label for='firstName'>First Name</label>
+                <input type="text" name="firstName" id='firstName' placeholder='John' data-validation='required'>
+                <label for='lastName'>Last Name</label>
+                <input type="text" name="lastName" id='lastName' placeholder='Smith'>
+                <label for='username'>User name:</label>
+                <input type="text" name="username" id='username-rg' placeholder='Username' data-validation='required'>
+                <label for='password'>Password</label><span id='errorNotLong'></span>
+                <input type="password" name="password" id='password-rg' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' data-validation='required' data-validation-length='min8' data-validation-help='Min 8 characters'>
+                <br>
+                <br>
+                <input id='register-modal-submit' class="button-primary" type="submit" value="Create Account">
+            </form>
+        </div>
+    </section>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
