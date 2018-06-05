@@ -50,9 +50,8 @@ Within this application, users can:
 ## Screenshots
 ![Home Page](https://github.com/arisimon/bird-app-v2/blob/master/public/images/home-page.png)
 ![Login Modal](https://github.com/arisimon/bird-app-v2/blob/master/public/images/login.png)
-![New User Registration Modal]()
+![New User Registration Modal](https://github.com/arisimon/bird-app-v2/blob/master/public/images/register.png)
 ![Observations Page](https://github.com/arisimon/bird-app-v2/blob/master/public/images/observation.png)
-![Observation Detail](https://github.com/arisimon/bird-app-v2/blob/master/public/images/new-observation.png)
 ![New Observation Modal](https://github.com/arisimon/bird-app-v2/blob/master/public/images/new-observation.png)
 ![Species Search](https://github.com/arisimon/bird-app-v2/blob/master/public/images/species.png)
 
