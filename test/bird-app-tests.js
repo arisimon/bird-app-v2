@@ -148,7 +148,7 @@ describe('Observations API testing', function() {
         //             const res = err.response;
         //             expect(res).to.have.status(401);
         //         });
-        // });
+        // // });
 
         // it('Should reject requests with incorrect passwords', function() {
         //     return chai
@@ -190,7 +190,6 @@ describe('Observations API testing', function() {
                 .then(function(_res) {
                     res = _res;
                     expect(res).to.have.status(200);
-                    console.log(res.body, 'hello!');
                     expect(res.body).to.have.length.of.at.least(1);
                     return Observations.count();
                 })
