@@ -344,7 +344,6 @@ function speciesSearch(input) {
 }
 
 function displaySpecies(species) {
-    console.log(species);
     $('.search-container').empty();
     if(species.length === 0) {
         alert('No results found. Try another search!');
