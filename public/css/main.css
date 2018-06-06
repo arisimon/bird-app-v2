@@ -5,14 +5,12 @@
     box-sizing: border-box;
 }
 
-.modal {
-    background: #EAD2AC;
-}
 .introduction {
     background: #EABA6B;
     border-radius: 1000px;
     margin-top: 20px;
     padding-bottom: 30px;
+    box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 6);
 }
 
 #bird-image {
@@ -35,7 +33,7 @@
 
 .login-container {
     background: #EABA6B;
-    box-shadow: 2px 4px 5px grey;
+    box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 6);
     border-radius: 1000px;
     padding: 5px;
 }
@@ -170,6 +168,7 @@
     padding: 30px 0 5px 0;
     text-align: center;
     line-height: 0.5;
+    box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 6);
 }
 
 .observation-items li:hover .observation-detail {

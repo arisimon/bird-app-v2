@@ -130,8 +130,8 @@ function displayObservations(observations) {
                    <p><strong>Observation Location:</strong> ${observations[index].location}</p>
                    <p class='notesText'><strong>Notes:</strong><br> ${observations[index].notes}</p>
                    <div class='button-container'>
-                    <a class='updateBtn button button-primary' rel="modal:open" href='#updateModal' type='submit'>Update</a>
-                    <button class='deleteBtn button button-primary'>Delete</button>
+                    <a class='updateBtn button button-primary' rel="modal:open" href='#updateModal' type='submit' role='button'>Update</a>
+                    <button class='deleteBtn button button-primary' role='button'>Delete</button>
                     </div>
                         </div>
                     </div>
@@ -225,7 +225,7 @@ function populateUpdateForm(id, element) {
             console.log(observation);
 
             let updateModalForm = `
-                <form id='updateModalForm' data-id='${observation._id}'>
+                <form id='updateModalForm' data-id='${observation._id}' role='form'>
             <div class='row'>
                 <div class='six columns'>
                     <h2>Bird</h2>
@@ -247,7 +247,7 @@ function populateUpdateForm(id, element) {
             </div>
             <label for="updateNotes">Observation Notes</label>
             <textarea class="u-full-width" name='notes' id='updateNotes'>${observation.notes}</textarea>
-            <input id='updateSubmitModal' class="button-primary" type="submit" value="Update">
+            <button id='updateSubmitModal' class='button-primary' type="submit">Update</button>
         </form>`
             $("#renderModal").html(updateModalForm);
         },

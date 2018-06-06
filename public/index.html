@@ -52,7 +52,7 @@
     </div>
     <section id='modal-section'>
         <!-- login modal -->
-        <div id="login-modal" class="modal container u-max-full-width">
+        <div id="login-modal" class="modal container u-max-full-width" role="dialog">
             <div class='row'>
                 <form id='login-modal-form' role='form' aria-label='login-form'>
                     <div class='u-full-width'>
@@ -62,20 +62,20 @@
                         <label for='password'>Password</label>
                         <input type="password" name="password" id='password' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' data-validation='required' data-validation-length='min8'>
                         <br>
-                        <input id='login-modal-submit' class="button-primary" type="submit" value="Sign In">
+                        <button id='login-modal-submit' class="button-primary" type="submit">Sign In</button>
                     </div>
                     <div class='u-full-width'>
                         <div class='demo-info'>
                             <br>
-                            <p><em><strong>Demo username: demo</strong></em></p>
-                            <p><em><strong>Demo password: password</strong></em></p>
+                            <p><em><strong>Demo username:</strong> demo</em></p>
+                            <p><em><strong>Demo password: </strong>password</em></p>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
         <!-- registration modal -->
-        <div id="register-modal" class="modal container u-max-full-width">
+        <div id="register-modal" class="modal container u-max-full-width" role="dialog">
             <br>
             <br>
             <form id='register-modal-form' role='form' aria-label='register-form'>
@@ -83,13 +83,13 @@
                 <input type="text" name="firstName" id='firstName' placeholder='John' data-validation='required'>
                 <label for='lastName'>Last Name</label>
                 <input type="text" name="lastName" id='lastName' placeholder='Smith'>
-                <label for='username'>User name:</label>
+                <label for='username-rg'>User name:</label>
                 <input type="text" name="username" id='username-rg' placeholder='Username' data-validation='required'>
-                <label for='password'>Password</label><span id='errorNotLong'></span>
+                <label for='password-rg'>Password</label><span id='errorNotLong'></span>
                 <input type="password" name="password" id='password-rg' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' data-validation='required' data-validation-length='min8' data-validation-help='Min 8 characters'>
                 <br>
                 <br>
-                <input id='register-modal-submit' class="button-primary" type="submit" value="Create Account">
+                <button id='register-modal-submit' class="button-primary" type="submit" role='button'>Create Account</button>
             </form>
         </div>
     </section>

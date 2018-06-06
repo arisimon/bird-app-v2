@@ -21,8 +21,8 @@
             <div class="twelve columns">
                 <h3 class="separator">Bird Search</h3>
                 <div class='button-container'>
-                    <button id='logout' class='button button-primary' type='button'>Log Out</button>
-                    <a href='/observations.html' id='go-back' class='button button-primary' type='button'>Go back</a>
+                    <button id='logout' class='button button-primary' type='button' role='button'>Log Out</button>
+                    <a href='/observations.html' id='go-back' class='button button-primary' type='button' role='button'>Go back</a>
                 </div>
                 <div>
                     <h4 class='species-search-header'>Want to learn more about your bird species? <br>Find their scientific name and family name here!</h4>
@@ -38,13 +38,13 @@
                         <label for='species-search' class='species-search-label'>Enter the common name of your bird here!</label>
                         <input type='text' role='search' name='species-search' id='species-search' data-validation='required' data-validation-regexp='/^[a-zA-Z\s]+$/'></input>
                         <br>
-                        <input type='submit' class='button button-primary button-container' value='Search'></input>
+                        <button type='submit' class='button button-primary button-container' value='Search' role='button'>Search</button>
                     </div>
                 </div>
             </div>
         </form>
     </section>
-    <section class='search-results-section u-full-width '>
+    <section class='search-results-section u-full-width' aria-live='assertive'>
         <div class='container search-container '>
         </div>
     </section>
