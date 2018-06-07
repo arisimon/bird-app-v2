@@ -56,7 +56,6 @@ router.get('/', passport.authenticate('jwt', { session: false }), function(req, 
 
                 }
                 res.status(200).json(allSpecies);
-                console.log(allSpecies);
             }
         });
     } else {

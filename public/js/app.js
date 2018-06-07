@@ -51,7 +51,7 @@ function handleLoginForm() {
             },
             error: function(err) {
                 console.log(err);
-                alert(err);
+
             }
         }
         $.ajax(settings);
@@ -84,9 +84,8 @@ function handleRegForm() {
 
             },
             error: function(err) {
-                if(password.length < 8) {
-                    $("#errorNotLong").html(`<p>Password must be at least 8 characters</p>`)
-                }
+                console.log(err);
+                alert(err.responseJSON.message);
             }
         };
         $.ajax(settings);
@@ -354,8 +353,8 @@ function displaySpecies(species) {
         $('.search-container').append(` 
             <div class='row style-results'>
                 <div class='ul-full-width species-div'>
-                    <span><h4><strong>Common Name:</strong></h4><h5> <em>${species[index].scientific_name}</em></h5></span>
-                    <h4><strong>Scientific Name:</strong></h4><h5> <em>${species[index].common_name}</em></h5>
+                    <span><h4><strong>Common Name:</strong></h4><h5> <em>${species[index].common_name}</em></h5></span>
+                    <h4><strong>Scientific Name:</strong></h4><h5> <em>${species[index].scientific_name}</em></h5>
                     <h4><strong>Family:</strong></h4><h5> <em>${species[index].family}</em></h5>
                 </div>
             </div>
