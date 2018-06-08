@@ -33,7 +33,9 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
         .catch(err => {
             res.status(500).json({ message: 'Internal server error' });
         })
-}) // //GET species based off search input, if not found get all species
+})
+
+// //GET species based off search input, if not found get all species
 // router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
 //     console.log('Received a GET request to find species');
 
