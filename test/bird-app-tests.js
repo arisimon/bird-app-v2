@@ -128,6 +128,52 @@ describe('API testing', function() {
         });
     });
 
+
+    describe('/POST Register', function() {
+        let loginDetails = {
+            'username': 'test',
+            'password': 'password'
+        }
+
+        let authToken;
+
+
+        it('should Register, and check token', function(done) {
+            chai.request(app)
+                .post('/users/')
+                .send(loginDetails)
+                .then(function(err, res) {
+                    res.should.have.status(201);
+                    chai.request(app)
+                })
+            done();
+        })
+    })
+
+    describe('/POST Login', function() {
+        let loginDetails = {
+            'username': 'test',
+            'password': 'password'
+        }
+
+        let authToken;
+
+
+        it('should Login, and check token', function(done) {
+            chai.request(app)
+                .post('/auth/login')
+                .send(loginDetails)
+                .then(function(err, res) {
+                    res.should.have.status(200);
+                    authToken = res.body.authToken;
+                    console.log("authToken at login =" + authToken);
+                    // login
+                    chai.request(app)
+                })
+            done();
+        })
+    })
+
     describe('Species GET endpoint', function() {
         const token = jwt.sign({
                 user: {
