@@ -15,6 +15,14 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
+//seed species database
+function generateSpecies() {
+    return {
+        common_name: faker.name.lastName(),
+        family: faker.name.firstName(),
+        scientific_name: faker.name.lastName()
+    }
+}
 
 //Seed observation database
 function generateObservations() {
@@ -27,6 +35,14 @@ function generateObservations() {
         notes: faker.lorem.paragraph(),
         photos: faker.image.imageUrl(),
     };
+}
+
+function seedSpeciesData() {
+    const seedData = [];
+    for(let i = 0; i < 5; i++) {
+        seedData.push(generateSpecies());
+    }
+    return Species.insertMany(seedData);
 }
 
 
@@ -49,7 +65,7 @@ function tearDownDb() {
 }
 
 
-describe('Observations API testing', function() {
+describe('API testing', function() {
 
     const username = 'user';
     const password = 'password';
@@ -62,6 +78,7 @@ describe('Observations API testing', function() {
 
     beforeEach(function() {
         seedData();
+        seedSpeciesData();
     });
 
     beforeEach(function() {
@@ -111,7 +128,37 @@ describe('Observations API testing', function() {
         });
     });
 
-    describe('GET endpoint', function() {
+    describe('Species GET endpoint', function() {
+        const token = jwt.sign({
+                user: {
+                    username,
+                }
+            },
+            JWT_SECRET, {
+                algorithm: 'HS256',
+                subject: username,
+                expiresIn: '7d'
+            }
+        );
+        it('should GET all species', function(done) {
+            chai.request(app)
+                .get('/api/species')
+                .set('authorization', `Bearer ${token}`)
+                .end(function(err, res) {
+                    console.log(res.body);
+                    expect(res).to.have.status(200);
+                    expect(res).to.be.json;
+                    expect(res.body).to.be.a('array');
+                    expect(res.body[0]).to.have.property('scientific_name');
+                    expect(res.body[0]).to.have.property('common_name');
+                    expect(res.body[0]).to.have.property('family');
+                    done();
+                });
+        });
+
+    });
+
+    describe('Observations GET endpoint', function() {
         const token = jwt.sign({
                 user: {
                     username,
@@ -143,7 +190,7 @@ describe('Observations API testing', function() {
     });
 
 
-    describe('POST endpoint', function() {
+    describe('Observations POST endpoint', function() {
 
         const token = jwt.sign({
                 user: {
@@ -185,7 +232,7 @@ describe('Observations API testing', function() {
     });
 
 
-    describe('PUT endpoint', function() {
+    describe('Observations PUT endpoint', function() {
         const token = jwt.sign({
                 user: {
                     username,
@@ -198,7 +245,7 @@ describe('Observations API testing', function() {
             }
         );
 
-        it('should update a Observations', function() {
+        it('should update an observation', function() {
             const updateObservations = {
                 scientificName: "Updated scientificName",
                 commonName: "Updated commonName",
@@ -236,7 +283,7 @@ describe('Observations API testing', function() {
         });
     });
 
-    describe('DELETE endpoint', function() {
+    describe('Observations DELETE endpoint', function() {
         const token = jwt.sign({
                 user: {
                     username,
@@ -272,5 +319,4 @@ describe('Observations API testing', function() {
         });
 
     });
-
 });

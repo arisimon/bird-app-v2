@@ -71,20 +71,6 @@ router.get('/', passport.authenticate('jwt', { session: false }), function(req, 
 });
 
 
-//GET request by ID
-router.get('/:id', jsonParser, passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log(`GETting species with ID: ${req.param.id}`);
-    Species
-        .findById(req.params.id)
-        .exec()
-        .then(species => res.status(200).json(species))
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({ message: 'Internal server error' })
-        })
-});
-
-
 function escapeRegex(text) {
     let object = (Object.keys(text));
     let format = object.toString();
